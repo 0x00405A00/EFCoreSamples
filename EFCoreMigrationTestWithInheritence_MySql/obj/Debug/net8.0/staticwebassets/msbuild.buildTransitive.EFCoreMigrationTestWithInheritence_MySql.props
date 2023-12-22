@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\EFCoreMigrationTestWithInheritence_MySql.props" />
+</Project>

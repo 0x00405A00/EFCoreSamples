@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCoreMigrationTestWithInheritence_MySql", "EFCoreMigrationTestWithInheritence_MySql\EFCoreMigrationTestWithInheritence_MySql.csproj", "{14DA2405-9EDD-4AC9-9F28-F768CAA50A1F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCoreMigrationTestWithInheritence_SqlLite", "EFCoreMigrationTestWithInheritence_SqlLite\EFCoreMigrationTestWithInheritence_SqlLite.csproj", "{87E2C8EA-2031-4481-9D16-9164B371C36C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{C2C5C344-2989-48F1-990A-273360A0DC6E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCoreMigrationTestWithInheritence_MySql_Updated", "EFCoreMigrationTestWithInheritence_MySql_Updated\EFCoreMigrationTestWithInheritence_MySql_Updated.csproj", "{029B9EAB-29D1-4C97-94FA-6CD2BBC0ECD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCoreMigrationTestWithInheritence_Psql", "EFCoreMigrationTestWithInheritence_Psql\EFCoreMigrationTestWithInheritence_Psql.csproj", "{E7A0F4AD-C7DC-4651-9DE9-5D83443511C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Backend|Any CPU = Backend|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14DA2405-9EDD-4AC9-9F28-F768CAA50A1F}.Backend|Any CPU.ActiveCfg = Debug|Any CPU
+		{14DA2405-9EDD-4AC9-9F28-F768CAA50A1F}.Backend|Any CPU.Build.0 = Debug|Any CPU
+		{14DA2405-9EDD-4AC9-9F28-F768CAA50A1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14DA2405-9EDD-4AC9-9F28-F768CAA50A1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14DA2405-9EDD-4AC9-9F28-F768CAA50A1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14DA2405-9EDD-4AC9-9F28-F768CAA50A1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87E2C8EA-2031-4481-9D16-9164B371C36C}.Backend|Any CPU.ActiveCfg = Debug|Any CPU
+		{87E2C8EA-2031-4481-9D16-9164B371C36C}.Backend|Any CPU.Build.0 = Debug|Any CPU
+		{87E2C8EA-2031-4481-9D16-9164B371C36C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87E2C8EA-2031-4481-9D16-9164B371C36C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87E2C8EA-2031-4481-9D16-9164B371C36C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87E2C8EA-2031-4481-9D16-9164B371C36C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2C5C344-2989-48F1-990A-273360A0DC6E}.Backend|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C5C344-2989-48F1-990A-273360A0DC6E}.Backend|Any CPU.Build.0 = Debug|Any CPU
+		{C2C5C344-2989-48F1-990A-273360A0DC6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C5C344-2989-48F1-990A-273360A0DC6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2C5C344-2989-48F1-990A-273360A0DC6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2C5C344-2989-48F1-990A-273360A0DC6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{029B9EAB-29D1-4C97-94FA-6CD2BBC0ECD0}.Backend|Any CPU.ActiveCfg = Debug|Any CPU
+		{029B9EAB-29D1-4C97-94FA-6CD2BBC0ECD0}.Backend|Any CPU.Build.0 = Debug|Any CPU
+		{029B9EAB-29D1-4C97-94FA-6CD2BBC0ECD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{029B9EAB-29D1-4C97-94FA-6CD2BBC0ECD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{029B9EAB-29D1-4C97-94FA-6CD2BBC0ECD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{029B9EAB-29D1-4C97-94FA-6CD2BBC0ECD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7A0F4AD-C7DC-4651-9DE9-5D83443511C2}.Backend|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7A0F4AD-C7DC-4651-9DE9-5D83443511C2}.Backend|Any CPU.Build.0 = Debug|Any CPU
+		{E7A0F4AD-C7DC-4651-9DE9-5D83443511C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7A0F4AD-C7DC-4651-9DE9-5D83443511C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7A0F4AD-C7DC-4651-9DE9-5D83443511C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7A0F4AD-C7DC-4651-9DE9-5D83443511C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6475E921-5764-4778-9508-5E6A3D4E74E7}
+	EndGlobalSection
+EndGlobal

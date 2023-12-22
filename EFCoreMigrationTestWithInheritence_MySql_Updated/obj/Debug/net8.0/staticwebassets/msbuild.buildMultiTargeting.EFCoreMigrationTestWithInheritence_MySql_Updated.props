@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\EFCoreMigrationTestWithInheritence_MySql_Updated.props" />
+</Project>
