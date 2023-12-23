@@ -9,3 +9,15 @@ C:\Users\Mika\source\repos\EFCoreMigrationTestWithInheritence\Shared\obj\Debug\n
 C:\Users\Mika\source\repos\EFCoreMigrationTestWithInheritence\Shared\obj\Debug\net8.0\refint\Shared.dll
 C:\Users\Mika\source\repos\EFCoreMigrationTestWithInheritence\Shared\obj\Debug\net8.0\Shared.pdb
 C:\Users\Mika\source\repos\EFCoreMigrationTestWithInheritence\Shared\obj\Debug\net8.0\ref\Shared.dll
+C:\Users\Mika\source\repos\EFCoreSamples\Shared\bin\Debug\net8.0\Shared.deps.json
+C:\Users\Mika\source\repos\EFCoreSamples\Shared\bin\Debug\net8.0\Shared.dll
+C:\Users\Mika\source\repos\EFCoreSamples\Shared\bin\Debug\net8.0\Shared.pdb
+C:\Users\Mika\source\repos\EFCoreSamples\Shared\obj\Debug\net8.0\Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mika\source\repos\EFCoreSamples\Shared\obj\Debug\net8.0\Shared.AssemblyInfoInputs.cache
+C:\Users\Mika\source\repos\EFCoreSamples\Shared\obj\Debug\net8.0\Shared.AssemblyInfo.cs
+C:\Users\Mika\source\repos\EFCoreSamples\Shared\obj\Debug\net8.0\Shared.csproj.CoreCompileInputs.cache
+C:\Users\Mika\source\repos\EFCoreSamples\Shared\obj\Debug\net8.0\Shared.sourcelink.json
+C:\Users\Mika\source\repos\EFCoreSamples\Shared\obj\Debug\net8.0\Shared.dll
+C:\Users\Mika\source\repos\EFCoreSamples\Shared\obj\Debug\net8.0\refint\Shared.dll
+C:\Users\Mika\source\repos\EFCoreSamples\Shared\obj\Debug\net8.0\Shared.pdb
+C:\Users\Mika\source\repos\EFCoreSamples\Shared\obj\Debug\net8.0\ref\Shared.dll

@@ -16,7 +16,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.10")
+                .HasAnnotation("ProductVersion", "7.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Shared.Data.Role", b =>
@@ -25,6 +25,15 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("char(36)")
                         .HasColumnName("uuid");
+
+                    b.Property<DateTime>("CreatedDateTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeletedDateTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("ModifiedDateTime")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -42,11 +51,13 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         new
                         {
                             Id = new Guid("c3f357ff-1c85-4e3c-b6b2-21ef4afba71f"),
+                            CreatedDateTime = new DateTime(2023, 12, 23, 10, 46, 35, 875, DateTimeKind.Local).AddTicks(8031),
                             Name = "Admin"
                         },
                         new
                         {
                             Id = new Guid("c92db414-765b-46dd-bf40-ef7d5a5abd7b"),
+                            CreatedDateTime = new DateTime(2023, 12, 23, 10, 46, 35, 875, DateTimeKind.Local).AddTicks(8047),
                             Name = "User"
                         });
                 });
@@ -58,15 +69,19 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("uuid");
 
-                    b.Property<DateTime?>("CreatedTime")
-                        .IsRequired()
-                        .HasMaxLength(64)
+                    b.Property<DateTime>("CreatedDateTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeletedDateTime")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("varchar(64)");
+
+                    b.Property<DateTime?>("ModifiedDateTime")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -88,6 +103,8 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.HasKey("Id")
                         .HasName("PRIMARY");
 
+                    b.HasIndex("UserTypeId");
+
                     b.HasIndex(new[] { "Id" }, "IDX_ID")
                         .HasDatabaseName("IDX_ID1");
 
@@ -97,7 +114,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         new
                         {
                             Id = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 22, 18, 28, 51, 301, DateTimeKind.Local).AddTicks(3342),
+                            CreatedDateTime = new DateTime(2023, 12, 23, 10, 46, 35, 875, DateTimeKind.Local).AddTicks(6785),
                             Email = "root@localhost",
                             Name = "Root",
                             Password = "abcd1234",
@@ -119,10 +136,19 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("user_id");
 
+                    b.Property<DateTime>("CreatedDateTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeletedDateTime")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<Guid>("Id")
                         .HasMaxLength(36)
                         .HasColumnType("char(36)")
                         .HasColumnName("uuid");
+
+                    b.Property<DateTime?>("ModifiedDateTime")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("RoleForeignKey", "UserForeignKey")
                         .HasName("PRIMARY");
@@ -141,6 +167,15 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("uuid");
 
+                    b.Property<DateTime>("CreatedDateTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeletedDateTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("ModifiedDateTime")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(64)
@@ -158,13 +193,26 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         new
                         {
                             Id = new Guid("c92db314-765b-46dd-bf40-ef7d5a5abd7b"),
+                            CreatedDateTime = new DateTime(2023, 12, 23, 10, 46, 35, 874, DateTimeKind.Local).AddTicks(4594),
                             Name = "User"
                         },
                         new
                         {
                             Id = new Guid("c3f257ff-1c85-4e3c-b6b2-21ef4afba71f"),
+                            CreatedDateTime = new DateTime(2023, 12, 23, 10, 46, 35, 874, DateTimeKind.Local).AddTicks(4653),
                             Name = "Root"
                         });
+                });
+
+            modelBuilder.Entity("Shared.Data.User", b =>
+                {
+                    b.HasOne("Shared.Data.UserType", "UserType")
+                        .WithMany("Users")
+                        .HasForeignKey("UserTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserType");
                 });
 
             modelBuilder.Entity("Shared.Data.UserHasRelationToRole", b =>
@@ -194,6 +242,11 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
             modelBuilder.Entity("Shared.Data.User", b =>
                 {
                     b.Navigation("UserHasRelationToRoles");
+                });
+
+            modelBuilder.Entity("Shared.Data.UserType", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

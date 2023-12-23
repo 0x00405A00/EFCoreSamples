@@ -26,8 +26,8 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Names);
 
-            var roleAdmin = new Role { Id = new RoleId(UserConst.Role.Admin), Name = "Admin" };
-            var roleUser = new Role { Id = new RoleId(UserConst.Role.User), Name = "User" };
+            var roleAdmin = new Role { Id = new RoleId(UserConst.Role.Admin) ,CreatedDateTime = new CustomDateTime(DateTime.Now), Name = "Admin" };
+            var roleUser = new Role { Id = new RoleId(UserConst.Role.User), CreatedDateTime = new CustomDateTime(DateTime.Now), Name = "User" };
             builder.HasData(roleAdmin, roleUser);
         }
     }

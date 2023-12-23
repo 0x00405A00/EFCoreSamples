@@ -1,4 +1,5 @@
-﻿using EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration;
+﻿using EFCoreMigrationTestWithInheritence_MySql_Updated.Converter;
+using EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Options;
@@ -84,6 +85,15 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated
 
             //Data seeding: Schema initial data with: https://learn.microsoft.com/de-de/ef/core/modeling/data-seeding
 
+        }
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            configurationBuilder
+                .Properties<CustomDateTime>()
+                .HaveConversion<CustomDateTimeConverter>();
+            configurationBuilder
+                .Properties<Identification>()
+                .HaveConversion<IdConverter>();
         }
         #endregion
     }

@@ -2,8 +2,14 @@
 
 namespace Shared.Data
 {
+    public record CustomDateTime(DateTime DateTime);
+    
     public abstract class Entity
     {
+        public CustomDateTime CreatedDateTime { get; set; }
+        public CustomDateTime? DeletedDateTime { get; set; } 
+        public CustomDateTime? ModifiedDateTime { get; set; }
+
         protected void SetValueInInstance<TEntity>(object instance, object value, Expression<Func<TEntity, object>> propertyExpression)
         {
 

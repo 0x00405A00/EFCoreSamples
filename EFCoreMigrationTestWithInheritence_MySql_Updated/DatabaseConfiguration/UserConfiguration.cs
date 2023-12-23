@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.Extensions.Hosting;
 using Shared.Const;
 using Shared.Data;
-using System.Xml.Linq;
 
 namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 {
@@ -11,18 +9,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            string tableName = DbContextExtension.GetTableName(typeof(User));
-            builder.ToTable(tableName);
-            builder.HasKey(ut => ut.Id).HasName("PRIMARY");
-
-            var keyIndex = DbContextExtension.GetIndexName(nameof(User.Id));
-            builder.HasIndex(e => e.Id, keyIndex);
-
-            builder.Property(ut => ut.Id)
-                .IsRequired()
-                .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
-                .HasColumnName(DbContextExtension.UuidName);
+            builder.AddDefaultProperties<User,UserId>();
 
             builder.Property(ut => ut.Name)
                 .IsRequired()
@@ -41,6 +28,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
             builder.Property(ut => ut.Password)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Names);
+
             /*builder.Property(ut => ut.CreatedTime)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Names);*/
@@ -64,7 +52,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
             {
                 Name = "Root",
                 Password = "abcd1234",
-                //CreatedTime = DateTime.Now,
+                CreatedDateTime = new CustomDateTime(DateTime.Now),
                 Email = $"root@localhost",
                 UserTypeId = new UserTypeId(UserConst.UserType.Root),
                 Id = new UserId(UserConst.RootUserId)
