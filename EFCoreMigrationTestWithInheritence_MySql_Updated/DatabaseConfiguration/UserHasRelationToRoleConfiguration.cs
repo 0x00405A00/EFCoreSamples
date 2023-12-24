@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EFCoreMigrationTestWithInheritence_MySql_Updated.Extension;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shared.Const;
-using Shared.Data;
+using Shared.Entities.Roles;
+using Shared.Entities.Users;
 
 namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 {
@@ -9,21 +11,13 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
     {
         public void Configure(EntityTypeBuilder<UserHasRelationToRole> builder)
         {
-            string tableName = DbContextExtension.GetTableName(typeof(UserHasRelationToRole));
-            builder.ToTable(tableName);
-            builder.HasKey(ut => new { ut.RoleForeignKey, ut.UserForeignKey }).HasName("PRIMARY");
+            builder.AddDefaultProperties<UserHasRelationToRole, UserHasRelationToRoleId>();
 
-            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole),nameof(UserHasRelationToRole.Id),nameof(User));
+            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.UserForeignKey), nameof(User));
             builder.HasIndex(e => e.UserForeignKey, fk1Index);
 
-            var fk2Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.Id), nameof(Role));
+            var fk2Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.RoleForeignKey), nameof(Role));
             builder.HasIndex(e => e.RoleForeignKey, fk2Index);
-
-            builder.Property(ut => ut.Id)
-                .IsRequired()
-                .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserHasRelationToRoleId(fromDb))
-                .HasColumnName(DbContextExtension.UuidName);
 
             builder.Property(ut => ut.RoleForeignKey)
                 .IsRequired()
@@ -31,7 +25,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .HasDefaultValue(new RoleId(Shared.Const.UserConst.Role.User))
                 .HasConversion(toDb => toDb.Uuid, fromDb => new RoleId(fromDb))
                 .HasColumnName("role_id");
-
+            
             builder.Property(ut => ut.UserForeignKey)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
@@ -49,6 +43,35 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .WithMany(p => p.UserHasRelationToRoles)
                 .HasForeignKey(d => d.RoleUuid)
                 .HasConstraintName(userRelationToRoleFkName);*/
+        }
+    }
+    internal class UserFriendsConfiguration : IEntityTypeConfiguration<UserFriend>
+    {
+        public void Configure(EntityTypeBuilder<UserFriend> builder)
+        {
+            builder.AddDefaultProperties<UserFriend, UserFriendId>();
+
+            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserFriend), nameof(UserFriend.UserForeignKey), nameof(User));
+            builder.HasIndex(e => e.UserForeignKey, fk1Index);
+
+            var fk2Index = DbContextExtension.GetIndexForFkName(nameof(UserFriend), nameof(UserFriend.FriendForeignKey), nameof(User));
+            builder.HasIndex(e => e.FriendForeignKey, fk2Index);
+
+
+
+            builder.Property(ut => ut.FriendForeignKey)
+                .IsRequired()
+                .HasMaxLength(DbContextExtension.ColumnLength.Ids)
+                .HasDefaultValue(new RoleId(Shared.Const.UserConst.Role.User))
+                .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
+                .HasColumnName("friend_id");
+
+            builder.Property(ut => ut.UserForeignKey)
+                .IsRequired()
+                .HasMaxLength(DbContextExtension.ColumnLength.Ids)
+                .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
+                .HasColumnName("user_id");
+
         }
     }
 }

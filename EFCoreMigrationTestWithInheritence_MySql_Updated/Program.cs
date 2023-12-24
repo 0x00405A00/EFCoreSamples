@@ -1,6 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Shared.Const;
-using Shared.Data;
 
 namespace EFCoreMigrationTestWithInheritence_MySql_Updated
 {

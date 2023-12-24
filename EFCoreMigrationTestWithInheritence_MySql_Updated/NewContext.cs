@@ -3,8 +3,10 @@ using EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Options;
-using Shared.Data;
 using Shared.EFCore;
+using Shared.Entities.Roles;
+using Shared.Entities.Users;
+using Shared.Primitives;
 
 namespace EFCoreMigrationTestWithInheritence_MySql_Updated
 {
@@ -68,6 +70,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new UserHasRelationToRoleConfiguration());
+
             /*modelBuilder.ApplyConfiguration<UserFriend>(new UserFriendConfiguration());
             modelBuilder.ApplyConfiguration<FriendshipRequest>(new UserFriendshipRequestConfiguration());
             modelBuilder.ApplyConfiguration<Role>(new RoleConfiguration());
@@ -91,9 +94,6 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated
             configurationBuilder
                 .Properties<CustomDateTime>()
                 .HaveConversion<CustomDateTimeConverter>();
-            configurationBuilder
-                .Properties<Identification>()
-                .HaveConversion<IdConverter>();
         }
         #endregion
     }

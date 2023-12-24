@@ -1,7 +1,7 @@
 ﻿using EFCoreMigrationTestWithInheritence.DatabaseConfiguration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Shared.Data;
+using Shared.Entities.Users;
 
 namespace EFCoreMigrationTestWithInheritence
 {

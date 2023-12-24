@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Shared.Const;
-using Shared.Data;
+using Shared.Entities.Users;
 
 namespace EFCoreMigrationTestWithInheritence_Psql.Pages
 {

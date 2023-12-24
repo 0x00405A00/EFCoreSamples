@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EFCoreMigrationTestWithInheritence_MySql_Updated.Extension;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shared.Const;
-using Shared.Data;
+using Shared.Entities.Roles;
+using Shared.Primitives;
 
 namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 {
@@ -9,25 +11,16 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
-            string tableName = DbContextExtension.GetTableName(typeof(Role));
-            builder.ToTable(tableName);
-            builder.HasKey(ut => ut.Id).HasName("PRIMARY");
-
-            var keyIndex = DbContextExtension.GetIndexName(nameof(Role.Id));
-            builder.HasIndex(e => e.Id, keyIndex);
-
-            builder.Property(ut => ut.Id)
-                .IsRequired()
-                .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasColumnName(DbContextExtension.UuidName)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new RoleId(fromDb));
+            builder.AddDefaultProperties<Role,RoleId>();
 
             builder.Property(ut => ut.Name)
                 .IsRequired()
-                .HasMaxLength(DbContextExtension.ColumnLength.Names);
+                .HasMaxLength(DbContextExtension.ColumnLength.Names)
+                .HasColumnName(DbContextExtension.ColumnNameDefinitions.Name);
 
-            var roleAdmin = new Role { Id = new RoleId(UserConst.Role.Admin) ,CreatedDateTime = new CustomDateTime(DateTime.Now), Name = "Admin" };
-            var roleUser = new Role { Id = new RoleId(UserConst.Role.User), CreatedDateTime = new CustomDateTime(DateTime.Now), Name = "User" };
+            var rootUser = DbContextExtension.GetRootUser();
+            var roleAdmin = new Role { Id = new RoleId(UserConst.Role.Admin), CreatedByUserForeignKey = rootUser.Id, CreatedTime = new CustomDateTime(DateTime.Now), Name = "Admin" };
+            var roleUser = new Role { Id = new RoleId(UserConst.Role.User), CreatedByUserForeignKey = rootUser.Id,  CreatedTime = new CustomDateTime(DateTime.Now), Name = "User" };
             builder.HasData(roleAdmin, roleUser);
         }
     }

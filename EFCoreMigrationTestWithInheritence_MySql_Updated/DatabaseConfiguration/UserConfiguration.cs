@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EFCoreMigrationTestWithInheritence_MySql_Updated.Extension;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shared.Const;
-using Shared.Data;
+using Shared.Entities.Users;
 
 namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 {
@@ -13,10 +14,13 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 
             builder.Property(ut => ut.Name)
                 .IsRequired()
-                .HasMaxLength(DbContextExtension.ColumnLength.Names);
+                .HasMaxLength(DbContextExtension.ColumnLength.Names)
+                .HasColumnName(DbContextExtension.ColumnNameDefinitions.Name);
+            
             builder.Property(ut => ut.Email)
                 .IsRequired()
-                .HasMaxLength(DbContextExtension.ColumnLength.Names);
+                .HasMaxLength(DbContextExtension.ColumnLength.Names)
+                .HasColumnName("email");
 
             builder.Property(ut => ut.UserTypeId)
                 .IsRequired()
@@ -27,37 +31,36 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 
             builder.Property(ut => ut.Password)
                 .IsRequired()
-                .HasMaxLength(DbContextExtension.ColumnLength.Names);
-
-            /*builder.Property(ut => ut.CreatedTime)
-                .IsRequired()
-                .HasMaxLength(DbContextExtension.ColumnLength.Names);*/
-
-            /*var userToUserTypeFkName = DbContextExtension.GetForeignKeyName(nameof(User), nameof(User.Id), nameof(UserType));
-            builder.HasOne(d => d.UserType)
-                .WithMany(p => p.Users)
-                .HasForeignKey(d => d.UserTypeId)
-                .HasConstraintName(userToUserTypeFkName);*/
+                .HasMaxLength(DbContextExtension.ColumnLength.Names)
+                .HasColumnName("password");
 
             builder.HasMany(u => u.Roles)
                 .WithMany(r => r.Users)
                 .UsingEntity<UserHasRelationToRole>(
                 j =>
                 {
-                    j.HasOne<User>(e=>e.User).WithMany(e=>e.UserHasRelationToRoles).HasForeignKey(e=>e.UserForeignKey);
-                    j.HasOne(t=>t.Role).WithMany(e=>e.UserHasRelationToRoles).HasForeignKey(e => e.RoleForeignKey);
+                    j.HasOne<User>(e => e.User).WithMany(e => e.UserHasRelationToRoles).HasForeignKey(e => e.UserForeignKey);
+                    j.HasOne(t => t.Role).WithMany(e => e.UserHasRelationToRoles).HasForeignKey(e => e.RoleForeignKey);
                 });
 
-            User rootUser = new User()
-            {
-                Name = "Root",
-                Password = "abcd1234",
-                CreatedDateTime = new CustomDateTime(DateTime.Now),
-                Email = $"root@localhost",
-                UserTypeId = new UserTypeId(UserConst.UserType.Root),
-                Id = new UserId(UserConst.RootUserId)
-            };
-            builder.HasData(rootUser);
+            /*builder.HasMany(u => u.FriendshipRequests)
+                .WithMany(r => r.Users)
+                .UsingEntity<FriendshipRequest>(
+                j =>
+                {
+                    j.HasOne<User>(e => e.RequestUser).WithMany(e => e.FriendshipRequests).HasForeignKey(e => e.RequestUserForeignKey);
+                    j.HasOne(t => t.TargetUser).WithMany(e => e.FriendshipRequests).HasForeignKey(e => e.TargetUserForeignKey);
+                });
+            builder.HasMany(u => u.UserFriends)
+                .WithMany(r => r.Users)
+                .UsingEntity<UserFriend>(
+                j =>
+                {
+                    j.HasOne<User>(e => e.User).WithMany(e => e.UserFriends).HasForeignKey(e => e.UserForeignKey);
+                    j.HasOne(t => t.Friend).WithMany(e => e.UserFriends).HasForeignKey(e => e.FriendForeignKey);
+                });*/
+
+            builder.HasData(DbContextExtension.GetRootUser());
         }
     }
 }

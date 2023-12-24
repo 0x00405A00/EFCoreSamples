@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EFCoreMigrationTestWithInheritence_MySql_Updated.Extension;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shared.Const;
-using Shared.Data;
+using Shared.Entities.Users;
+using Shared.Primitives;
 
 namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 {
@@ -9,25 +11,16 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
     {
         public void Configure(EntityTypeBuilder<UserType> builder)
         {
-            string tableName = DbContextExtension.GetTableName(typeof(UserType));
-            builder.ToTable(tableName);
-            builder.HasKey(ut => ut.Id).HasName("PRIMARY");
-
-            var keyIndex = DbContextExtension.GetIndexName(nameof(UserType.Id));
-            builder.HasIndex(e => e.Id, keyIndex);
-
-            builder.Property(ut => ut.Id)
-                .IsRequired()
-                .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasColumnName(DbContextExtension.UuidName)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserTypeId(fromDb));
+            builder.AddDefaultProperties<UserType,UserTypeId>();
 
             builder.Property(ut => ut.Name)
                 .IsRequired()
-                .HasMaxLength(DbContextExtension.ColumnLength.Names);
+                .HasMaxLength(DbContextExtension.ColumnLength.Names)
+                .HasColumnName(DbContextExtension.ColumnNameDefinitions.Name);
 
-            var userType1 = new UserType { Id = new UserTypeId(UserConst.UserType.User), CreatedDateTime = new CustomDateTime(DateTime.Now), Name = "User" };
-            var userType2 = new UserType { Id = new UserTypeId(UserConst.UserType.Root), CreatedDateTime = new CustomDateTime(DateTime.Now), Name = "Root" };
+            var rootUser = DbContextExtension.GetRootUser();
+            var userType1 = new UserType { Id = new UserTypeId(UserConst.UserType.User),CreatedByUserForeignKey = rootUser.Id, CreatedTime = new CustomDateTime(DateTime.Now), Name = "User" };
+            var userType2 = new UserType { Id = new UserTypeId(UserConst.UserType.Root), CreatedByUserForeignKey = rootUser.Id, CreatedTime = new CustomDateTime(DateTime.Now), Name = "Root" };
             builder.HasData(userType1, userType2);
         }
     }

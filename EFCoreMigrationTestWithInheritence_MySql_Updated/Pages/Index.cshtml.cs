@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Shared.Const;
-using Shared.Data;
+using Shared.Entities.Users;
 
 namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Pages
 {
@@ -27,11 +27,14 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Pages
 
         public async Task<IActionResult> OnPostTestEFCore()
         {
+
+
             var DbSet = dbContext.Set<User>();
             //Synchron Tests
             var testUserSelect = DbSet
                 .Include(x => x.UserHasRelationToRoles)
                 .ThenInclude(y => y.Role)
+                .Include(x=>x.CreatedByUser)
                 .Include(x => x.UserType)
                 .AsNoTracking()
                 .Where(x => x.Name == "Root")

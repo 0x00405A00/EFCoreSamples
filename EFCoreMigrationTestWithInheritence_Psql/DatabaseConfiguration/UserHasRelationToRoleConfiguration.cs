@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shared.Const;
-using Shared.Data;
+using Shared.Entities.Roles;
+using Shared.Entities.Users;
 
 namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration
 {

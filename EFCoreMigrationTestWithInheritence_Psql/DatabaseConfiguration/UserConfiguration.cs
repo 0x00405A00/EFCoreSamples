@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.Hosting;
 using Shared.Const;
-using Shared.Data;
+using Shared.Entities.Users;
 using System.Xml.Linq;
 
 namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration

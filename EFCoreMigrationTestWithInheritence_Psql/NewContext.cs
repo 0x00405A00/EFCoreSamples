@@ -2,8 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Options;
-using Shared.Data;
 using Shared.EFCore;
+using Shared.Entities.Roles;
+using Shared.Entities.Users;
 
 namespace EFCoreMigrationTestWithInheritence_Psql
 {

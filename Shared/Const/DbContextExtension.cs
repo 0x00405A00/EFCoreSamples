@@ -1,10 +1,31 @@
-﻿using System.Text;
+﻿using Shared.Entities.Users;
+using Shared.Primitives;
+using System.Text;
 
 namespace Shared.Const
 {
     public static partial class DbContextExtension
     {
-        public const string UuidName = "uuid";
+        public struct ColumnNameDefinitions
+        {
+            public const string UuidName = "uuid";
+            public const string Name = "name";
+            public const string Description = "description";
+
+            public struct UserSpecific
+            {
+                public const string CreatedByUser = "created_by_uuid";
+                public const string ModifiedByUser = "modified_by_uuid";
+                public const string DeletedByUser = "deleted_by_uuid";
+            }
+
+            public struct TimeSpecific
+            {
+                public const string CreatedTime = "created_time";
+                public const string ModifiedTime = "modified_time";
+                public const string DeletedTime = "deleted_time";
+            }
+        }
         public struct ColumnLength
         {
             public const int Ids = 36;
@@ -35,5 +56,19 @@ namespace Shared.Const
         { return ($"IDX_FK_{fromEntity}_{fromEntityKeyName}_{foreignEntityName}").ToUpper(); });
         public static Func<string, string, string, string> GetForeignKeyName = new Func<string, string, string, string>((fromEntity,fromEntityKeyName, to) =>
         { return ($"FK_{fromEntity}_{fromEntityKeyName}_TO_{to}").ToUpper(); });
+
+        public static User GetRootUser()
+        {
+            User rootUser = new User()
+            {
+                Name = "Root",
+                Password = "abcd1234",
+                CreatedTime = new CustomDateTime(DateTime.Now),
+                Email = $"root@localhost",
+                UserTypeId = new UserTypeId(UserConst.UserType.Root),
+                Id = new UserId(UserConst.RootUserId)
+            };
+            return rootUser;
+        }
     }
 }
