@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7+d/pPdDO1d997dd3YIiqQat+cXZ+AJeYKHN/rka/AMM0xSvY+sYTmGF8dzYbmWGF6V98Mptp9wl8zsUcsozXw==",
+  "dgSpecHash": "7pR4MGbBzdN4nRbn1Xn/qi3WOU7QInjPYaemjCqQca+2QbwjiJIJJiJgJR0sPxjSnknFHaAEwr4SQOlBBtE0jg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mika\\source\\repos\\EFCoreSamples\\EFCoreMigrationTestWithInheritence_MySql_Updated\\EFCoreMigrationTestWithInheritence_MySql_Updated.csproj",
   "expectedPackageFiles": [
@@ -32,7 +32,7 @@
     "C:\\Users\\Mika\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\Mika\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\Mika\\.nuget\\packages\\mysql.data\\8.2.0\\mysql.data.8.2.0.nupkg.sha512",
-    "C:\\Users\\Mika\\.nuget\\packages\\mysql.entityframeworkcore\\7.0.5\\mysql.entityframeworkcore.7.0.5.nupkg.sha512",
+    "C:\\Users\\Mika\\.nuget\\packages\\mysql.entityframeworkcore\\7.0.10\\mysql.entityframeworkcore.7.0.10.nupkg.sha512",
     "C:\\Users\\Mika\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\Mika\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\Mika\\.nuget\\packages\\system.configuration.configurationmanager\\4.4.1\\system.configuration.configurationmanager.4.4.1.nupkg.sha512",

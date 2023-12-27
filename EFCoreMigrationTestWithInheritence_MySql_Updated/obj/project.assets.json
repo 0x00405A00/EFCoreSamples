@@ -494,12 +494,12 @@
           }
         }
       },
-      "MySql.EntityFrameworkCore/7.0.5": {
+      "MySql.EntityFrameworkCore/7.0.10": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "7.0.5",
-          "Microsoft.EntityFrameworkCore.Relational": "7.0.5",
-          "MySql.Data": "8.1.0"
+          "Microsoft.EntityFrameworkCore": "7.0.10",
+          "Microsoft.EntityFrameworkCore.Relational": "7.0.10",
+          "MySql.Data": "7.0.10"
         },
         "compile": {
           "lib/net7.0/MySql.EntityFrameworkCore.dll": {
@@ -1597,18 +1597,16 @@
         "runtimes/win-x64/native/krbcc64.dll"
       ]
     },
-    "MySql.EntityFrameworkCore/7.0.5": {
-      "sha512": "cgAuQZqGaqWm+7B7CZ1fIJrA4/V8JITFuRAC5FEWlhvZA0SM9pH7iYzaCla4gsk97n81ZBqLJyquUI5VTucG3w==",
+    "MySql.EntityFrameworkCore/7.0.10": {
+      "sha512": "PuAFmYC8Fuf14TkOiw/8dydBN6rW5xj6ZFneSvJ3GzpuBbpoP09pN5/U5If9IjjirxIpJNT4LCCvZOKAqEa3qg==",
       "type": "package",
-      "path": "mysql.entityframeworkcore/7.0.5",
+      "path": "mysql.entityframeworkcore/7.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lib/net6.0/MySql.EntityFrameworkCore.dll",
-        "lib/net6.0/MySql.EntityFrameworkCore.xml",
         "lib/net7.0/MySql.EntityFrameworkCore.dll",
         "lib/net7.0/MySql.EntityFrameworkCore.xml",
-        "mysql.entityframeworkcore.7.0.5.nupkg.sha512",
+        "mysql.entityframeworkcore.7.0.10.nupkg.sha512",
         "mysql.entityframeworkcore.nuspec"
       ]
     },
@@ -2719,7 +2717,7 @@
       "Microsoft.EntityFrameworkCore.Proxies >= 7.0.14",
       "Microsoft.EntityFrameworkCore.Relational >= 7.0.14",
       "MySql.Data >= 8.2.0",
-      "MySql.EntityFrameworkCore >= 7.0.5",
+      "MySql.EntityFrameworkCore >= 7.0.10",
       "Shared >= 1.0.0"
     ]
   },
@@ -2800,7 +2798,7 @@
           },
           "MySql.EntityFrameworkCore": {
             "target": "Package",
-            "version": "[7.0.5, )"
+            "version": "[7.0.10, )"
           }
         },
         "imports": [

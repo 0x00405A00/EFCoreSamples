@@ -1,5 +1,6 @@
 ﻿using Shared.Entities.Users;
 using Shared.Primitives;
+using Shared.ValueObjects.Ids;
 using System.Text;
 
 namespace Shared.Const
@@ -26,12 +27,22 @@ namespace Shared.Const
                 public const string DeletedTime = "deleted_time";
             }
         }
+        public struct ConstraintNameDefinitions
+        {
+
+        }
+        public struct IndexNameDefinitions
+        {
+            public const string PrimaryKeyIndex = "PRIMARY";
+        }
+
         public struct ColumnLength
         {
             public const int Ids = 36;
             public const int Names = 64;
             public const int Descriptions = 255;
         }
+
         public static Func<Type, string> GetTableName = new Func<Type, string>((type) =>
         {
             string typeName = type.Name;
@@ -50,24 +61,43 @@ namespace Shared.Const
 
             return ($"{tableName}").ToLower();
         });
-        public static Func<string, string> GetIndexName = new Func<string, string>((name) =>
-        { return ($"IDX_{name}").ToUpper(); });
-        public static Func<string, string, string, string> GetIndexForFkName = new Func<string, string, string, string>((fromEntity, fromEntityKeyName, foreignEntityName) =>
-        { return ($"IDX_FK_{fromEntity}_{fromEntityKeyName}_{foreignEntityName}").ToUpper(); });
-        public static Func<string, string, string, string> GetForeignKeyName = new Func<string, string, string, string>((fromEntity,fromEntityKeyName, to) =>
-        { return ($"FK_{fromEntity}_{fromEntityKeyName}_TO_{to}").ToUpper(); });
 
-        public static User GetRootUser()
+        public static Func<string, string> GetIndexName = new Func<string, string>((name) =>
+        { 
+            return ($"IDX_{name}").ToUpper(); 
+        });
+
+        public static Func<string, string, string, string> GetIndexForFkName = new Func<string, string, string, string>((fromEntity, fromEntityKeyName, foreignEntityName) =>
+        { 
+            return ($"IDX_FK_{fromEntity}_{fromEntityKeyName}_{foreignEntityName}").ToUpper(); 
+        });
+
+        public static Func<string, string, string, string> GetForeignKeyName = new Func<string, string, string, string>((fromEntity,fromEntityKeyName, to) =>
+        { 
+            return ($"FK_{fromEntity}_{fromEntityKeyName}_TO_{to}").ToUpper(); 
+        });
+
+        public static EUser GetRootUser()
         {
-            User rootUser = new User()
-            {
+            /*
                 Name = "Root",
                 Password = "abcd1234",
                 CreatedTime = new CustomDateTime(DateTime.Now),
                 Email = $"root@localhost",
                 UserTypeId = new UserTypeId(UserConst.UserType.Root),
-                Id = new UserId(UserConst.RootUserId)
-            };
+                Id = new UserId(UserConst.RootUserId)             */
+            EUser rootUser = EUser.Create(
+                new UserId(UserConst.RootUserId),
+                "Root",
+                $"root@localhost",
+                "abcd1234",
+                new UserTypeId(UserConst.UserType.Root),
+                new CustomDateTime(DateTime.Now),
+                null,
+                null,
+                null,
+                null,
+                null);
             return rootUser;
         }
     }

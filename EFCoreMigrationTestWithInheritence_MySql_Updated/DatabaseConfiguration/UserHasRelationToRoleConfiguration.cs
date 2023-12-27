@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shared.Const;
 using Shared.Entities.Roles;
 using Shared.Entities.Users;
+using Shared.ValueObjects.Ids;
 
 namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 {
@@ -13,7 +14,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
         {
             builder.AddDefaultProperties<UserHasRelationToRole, UserHasRelationToRoleId>();
 
-            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.UserForeignKey), nameof(User));
+            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.UserForeignKey), nameof(EUser));
             builder.HasIndex(e => e.UserForeignKey, fk1Index);
 
             var fk2Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.RoleForeignKey), nameof(Role));
@@ -32,17 +33,15 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
                 .HasColumnName("user_id");
 
-            /*var userRelationToUserFkName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToRole),nameof(UserHasRelationToRole.Uuid), nameof(User));
-            builder.HasOne(d => d.UserUu)
-                .WithMany(p => p.UserHasRelationToRoles)
-                .HasForeignKey(d => d.UserUuid)
-                .HasConstraintName(userRelationToUserFkName);
+            builder.HasOne(d => d.Role).WithMany(p => p.UserHasRelationToRoles)
+                .HasForeignKey(d => d.RoleForeignKey)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("fk_userRoleToRole");
 
-            var userRelationToRoleFkName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.Uuid), nameof(Role));
-            builder.HasOne(d => d.RoleUu)
-                .WithMany(p => p.UserHasRelationToRoles)
-                .HasForeignKey(d => d.RoleUuid)
-                .HasConstraintName(userRelationToRoleFkName);*/
+            /*builder.HasOne(d => d.User).WithMany(p => p.UserHasRelationToRoles)
+                .HasForeignKey(d => d.UserForeignKey)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("fk_userRoleToUser");*/
         }
     }
     internal class UserFriendsConfiguration : IEntityTypeConfiguration<UserFriend>
@@ -51,18 +50,15 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
         {
             builder.AddDefaultProperties<UserFriend, UserFriendId>();
 
-            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserFriend), nameof(UserFriend.UserForeignKey), nameof(User));
+            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserFriend), nameof(UserFriend.UserForeignKey), nameof(EUser));
             builder.HasIndex(e => e.UserForeignKey, fk1Index);
 
-            var fk2Index = DbContextExtension.GetIndexForFkName(nameof(UserFriend), nameof(UserFriend.FriendForeignKey), nameof(User));
+            var fk2Index = DbContextExtension.GetIndexForFkName(nameof(UserFriend), nameof(UserFriend.FriendForeignKey), nameof(EUser));
             builder.HasIndex(e => e.FriendForeignKey, fk2Index);
-
-
 
             builder.Property(ut => ut.FriendForeignKey)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasDefaultValue(new RoleId(Shared.Const.UserConst.Role.User))
                 .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
                 .HasColumnName("friend_id");
 

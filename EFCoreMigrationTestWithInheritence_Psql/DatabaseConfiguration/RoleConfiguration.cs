@@ -26,8 +26,8 @@ namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Names);
 
-            var roleAdmin = new Role { Id = new RoleId(UserConst.Role.Admin), Name = "Admin" };
-            var roleUser = new Role { Id = new RoleId(UserConst.Role.User), Name = "User" };
+            var roleAdmin = new Role { Id = new RoleIdent(UserConst.Role.Admin), Name = "Admin" };
+            var roleUser = new Role { Id = new RoleIdent(UserConst.Role.User), Name = "User" };
             builder.HasData(roleAdmin, roleUser);
         }
     }

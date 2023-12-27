@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shared.Const;
 using Shared.Entities.Roles;
+using Shared.Entities.Users;
 using Shared.Primitives;
+using Shared.ValueObjects.Ids;
 
 namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 {
@@ -11,16 +13,54 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.AddDefaultProperties<Role,RoleId>();
+            builder.AddDefaultProperties<Role, RoleId>();
+            builder.AddAuditableProperties<Role, RoleId>();
 
             builder.Property(ut => ut.Name)
                 .IsRequired()
-                .HasMaxLength(DbContextExtension.ColumnLength.Names)
                 .HasColumnName(DbContextExtension.ColumnNameDefinitions.Name);
 
+            string createdByUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(Role), nameof(Role.CreatedByUserForeignKey), nameof(EUser));
+            string modifiedByUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(Role), nameof(Role.LastModifiedByUserForeignKey), nameof(EUser));
+            string deletedByUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(Role), nameof(Role.DeletedByUserForeignKey), nameof(EUser));
+            builder.HasOne(u => u.CreatedByUser)
+                .WithMany(x => x.CreatedRoles)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(x => x.CreatedByUserForeignKey)
+                .HasConstraintName(createdByUserConstraintName);
+            builder.HasOne(u => u.LastModifiedByUser)
+                .WithMany(x => x.ModifiedRoles)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(x => x.LastModifiedByUserForeignKey)
+                .HasConstraintName(modifiedByUserConstraintName);
+            builder.HasOne(u => u.DeletedByUser)
+                .WithMany(x => x.DeletedRoles)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(x => x.DeletedByUserForeignKey)
+                .HasConstraintName(deletedByUserConstraintName);
+
             var rootUser = DbContextExtension.GetRootUser();
-            var roleAdmin = new Role { Id = new RoleId(UserConst.Role.Admin), CreatedByUserForeignKey = rootUser.Id, CreatedTime = new CustomDateTime(DateTime.Now), Name = "Admin" };
-            var roleUser = new Role { Id = new RoleId(UserConst.Role.User), CreatedByUserForeignKey = rootUser.Id,  CreatedTime = new CustomDateTime(DateTime.Now), Name = "User" };
+            var roleAdmin = Role.Create(
+                new RoleId(UserConst.Role.Admin),
+                "Admin",
+                new CustomDateTime(DateTime.Now),
+                null,
+                null,
+                null,
+                null,
+                null);
+            var roleUser = Role.Create(
+                new RoleId(UserConst.Role.User),
+                "User",
+                new CustomDateTime(DateTime.Now),
+                null,
+                null,
+                null,
+                null,
+                null);
             builder.HasData(roleAdmin, roleUser);
         }
     }

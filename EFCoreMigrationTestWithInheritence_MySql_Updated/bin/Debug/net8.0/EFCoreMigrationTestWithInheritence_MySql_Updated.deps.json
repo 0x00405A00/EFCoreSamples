@@ -14,7 +14,7 @@
           "Microsoft.EntityFrameworkCore.Proxies": "7.0.14",
           "Microsoft.EntityFrameworkCore.Relational": "7.0.14",
           "MySql.Data": "8.2.0",
-          "MySql.EntityFrameworkCore": "7.0.5",
+          "MySql.EntityFrameworkCore": "7.0.10",
           "Shared": "1.0.0"
         },
         "runtime": {
@@ -282,7 +282,7 @@
           }
         }
       },
-      "MySql.EntityFrameworkCore/7.0.5": {
+      "MySql.EntityFrameworkCore/7.0.10": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "7.0.14",
           "Microsoft.EntityFrameworkCore.Relational": "7.0.14",
@@ -290,8 +290,8 @@
         },
         "runtime": {
           "lib/net7.0/MySql.EntityFrameworkCore.dll": {
-            "assemblyVersion": "7.0.5.0",
-            "fileVersion": "7.0.5.0"
+            "assemblyVersion": "7.0.10.0",
+            "fileVersion": "7.0.10.0"
           }
         }
       },
@@ -680,12 +680,12 @@
       "path": "mysql.data/8.2.0",
       "hashPath": "mysql.data.8.2.0.nupkg.sha512"
     },
-    "MySql.EntityFrameworkCore/7.0.5": {
+    "MySql.EntityFrameworkCore/7.0.10": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-cgAuQZqGaqWm+7B7CZ1fIJrA4/V8JITFuRAC5FEWlhvZA0SM9pH7iYzaCla4gsk97n81ZBqLJyquUI5VTucG3w==",
-      "path": "mysql.entityframeworkcore/7.0.5",
-      "hashPath": "mysql.entityframeworkcore.7.0.5.nupkg.sha512"
+      "sha512": "sha512-PuAFmYC8Fuf14TkOiw/8dydBN6rW5xj6ZFneSvJ3GzpuBbpoP09pN5/U5If9IjjirxIpJNT4LCCvZOKAqEa3qg==",
+      "path": "mysql.entityframeworkcore/7.0.10",
+      "hashPath": "mysql.entityframeworkcore.7.0.10.nupkg.sha512"
     },
     "System.Buffers/4.5.1": {
       "type": "package",

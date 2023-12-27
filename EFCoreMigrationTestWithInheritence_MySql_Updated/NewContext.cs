@@ -21,16 +21,16 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated
         public DbContextOptions<NewContext> Options { get; }
         #endregion
         #region DbSets
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<UserHasRelationToRole> UserHasRelationToRoles { get; set; }
-        public virtual DbSet<UserType> UserTypes { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserHasRelationToRole> UserHasRelationToRoles { get; set; }
+        public DbSet<UserType> UserTypes { get; set; }
+        public DbSet<EUser> Users { get; set; }
         #endregion
         #region Ctor
-        public NewContext() : base()
+        /*public NewContext() : base()
         {
 
-        }
+        }*/
         public NewContext(DbContextOptions<NewContext> dbContextOptions) : base(dbContextOptions)
         {
 #warning IMPORTANT: MySql Compability is currently working with current packages: \
@@ -61,7 +61,6 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated
 #warning Documentation: https://learn.microsoft.com/de-de/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
             //pay attention to dependency order (chicken egg problem)
 
             //Initial Migration: PS C:\Users\Mika\source\repos\jellyfish-backend-ddd\Presentation> dotnet ef migrations add InitialCreate --context ApplicationDbContext
@@ -71,18 +70,6 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new UserHasRelationToRoleConfiguration());
 
-            /*modelBuilder.ApplyConfiguration<UserFriend>(new UserFriendConfiguration());
-            modelBuilder.ApplyConfiguration<FriendshipRequest>(new UserFriendshipRequestConfiguration());
-            modelBuilder.ApplyConfiguration<Role>(new RoleConfiguration());
-            modelBuilder.ApplyConfiguration<UserRole>(new UserRoleConfiguration());
-            modelBuilder.ApplyConfiguration<Auth>(new AuthConfiguration());
-            modelBuilder.ApplyConfiguration<Chat>(new ChatConfiguration());
-            modelBuilder.ApplyConfiguration<ChatMember>(new ChatMemberConfiguration());
-            modelBuilder.ApplyConfiguration<Message>(new ChatMessageConfiguration());
-            modelBuilder.ApplyConfiguration<EmailType>(new EmailTypeConfiguration());
-            modelBuilder.ApplyConfiguration<MailOutbox>(new MailConfiguration());
-            modelBuilder.ApplyConfiguration<MailOutboxRecipient>(new MailRecipientConfiguration());
-            modelBuilder.ApplyConfiguration<MailOutboxAttachment>(new MailAttachmentConfiguration());*/
 
             //modelBuilder.ApplyConfigurationsFromAssembly ignore any order so dependencies which are order depend could not be created (app runs in exception)
 

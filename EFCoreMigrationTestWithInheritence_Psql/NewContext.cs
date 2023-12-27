@@ -22,7 +22,7 @@ namespace EFCoreMigrationTestWithInheritence_Psql
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<UserHasRelationToRole> UserHasRelationToRoles { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<EUser> Users { get; set; }
         #endregion
         #region Ctor
         public NewContext() : base()

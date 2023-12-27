@@ -26,17 +26,15 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("uuid");
 
-                    b.Property<Guid>("CreatedByUserForeignKey")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid?>("CreatedByUserForeignKey")
                         .HasMaxLength(36)
                         .HasColumnType("char(36)")
-                        .HasDefaultValue(new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"))
                         .HasColumnName("created_by_uuid");
 
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 12, 24, 15, 7, 37, 561, DateTimeKind.Local).AddTicks(3107))
+                        .HasColumnType("datetime")
+                        .HasDefaultValue(new DateTime(2023, 12, 27, 16, 10, 13, 581, DateTimeKind.Local).AddTicks(5539))
                         .HasColumnName("created_time");
 
                     b.Property<Guid?>("DeletedByUserForeignKey")
@@ -45,7 +43,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasColumnName("deleted_by_uuid");
 
                     b.Property<DateTime?>("DeletedTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime")
                         .HasColumnName("deleted_time");
 
                     b.Property<Guid?>("LastModifiedByUserForeignKey")
@@ -54,25 +52,22 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasColumnName("modified_by_uuid");
 
                     b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("last_modified_time");
+                        .HasColumnType("datetime")
+                        .HasColumnName("modified_time");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("longtext")
                         .HasColumnName("name");
 
                     b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.HasIndex(new[] { "CreatedByUserForeignKey" }, "IDX_FK_TENTITY_CREATEDBYUSER_USER");
+                    b.HasIndex("CreatedByUserForeignKey");
 
-                    b.HasIndex(new[] { "DeletedByUserForeignKey" }, "IDX_FK_TENTITY_DELETEDBYUSER_USER");
+                    b.HasIndex("DeletedByUserForeignKey");
 
-                    b.HasIndex(new[] { "LastModifiedByUserForeignKey" }, "IDX_FK_TENTITY_LASTMODIFIEDTIME_USER");
-
-                    b.HasIndex(new[] { "Id" }, "IDX_TENTITYID");
+                    b.HasIndex("LastModifiedByUserForeignKey");
 
                     b.ToTable("role", (string)null);
 
@@ -80,37 +75,33 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         new
                         {
                             Id = new Guid("c3f357ff-1c85-4e3c-b6b2-21ef4afba71f"),
-                            CreatedByUserForeignKey = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 24, 15, 7, 37, 561, DateTimeKind.Local).AddTicks(4163),
+                            CreatedTime = new DateTime(2023, 12, 27, 16, 10, 13, 586, DateTimeKind.Local).AddTicks(3721),
                             Name = "Admin"
                         },
                         new
                         {
                             Id = new Guid("c92db414-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedByUserForeignKey = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 24, 15, 7, 37, 561, DateTimeKind.Local).AddTicks(4166),
+                            CreatedTime = new DateTime(2023, 12, 27, 16, 10, 13, 586, DateTimeKind.Local).AddTicks(3727),
                             Name = "User"
                         });
                 });
 
-            modelBuilder.Entity("Shared.Entities.Users.User", b =>
+            modelBuilder.Entity("Shared.Entities.Users.EUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasMaxLength(36)
                         .HasColumnType("char(36)")
                         .HasColumnName("uuid");
 
-                    b.Property<Guid>("CreatedByUserForeignKey")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid?>("CreatedByUserForeignKey")
                         .HasMaxLength(36)
                         .HasColumnType("char(36)")
-                        .HasDefaultValue(new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"))
                         .HasColumnName("created_by_uuid");
 
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 12, 24, 15, 7, 37, 550, DateTimeKind.Local).AddTicks(1453))
+                        .HasColumnType("datetime")
+                        .HasDefaultValue(new DateTime(2023, 12, 27, 16, 10, 13, 571, DateTimeKind.Local).AddTicks(1081))
                         .HasColumnName("created_time");
 
                     b.Property<Guid?>("DeletedByUserForeignKey")
@@ -119,13 +110,12 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasColumnName("deleted_by_uuid");
 
                     b.Property<DateTime?>("DeletedTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime")
                         .HasColumnName("deleted_time");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("varchar(64)")
+                        .HasColumnType("longtext")
                         .HasColumnName("email");
 
                     b.Property<Guid?>("LastModifiedByUserForeignKey")
@@ -134,8 +124,8 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasColumnName("modified_by_uuid");
 
                     b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("last_modified_time");
+                        .HasColumnType("datetime")
+                        .HasColumnName("modified_time");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -159,27 +149,21 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.HasKey("Id")
                         .HasName("PRIMARY");
 
+                    b.HasIndex("CreatedByUserForeignKey");
+
+                    b.HasIndex("DeletedByUserForeignKey");
+
+                    b.HasIndex("LastModifiedByUserForeignKey");
+
                     b.HasIndex("UserTypeId");
 
-                    b.HasIndex(new[] { "CreatedByUserForeignKey" }, "IDX_FK_TENTITY_CREATEDBYUSER_USER")
-                        .HasDatabaseName("IDX_FK_TENTITY_CREATEDBYUSER_USER1");
-
-                    b.HasIndex(new[] { "DeletedByUserForeignKey" }, "IDX_FK_TENTITY_DELETEDBYUSER_USER")
-                        .HasDatabaseName("IDX_FK_TENTITY_DELETEDBYUSER_USER1");
-
-                    b.HasIndex(new[] { "LastModifiedByUserForeignKey" }, "IDX_FK_TENTITY_LASTMODIFIEDTIME_USER")
-                        .HasDatabaseName("IDX_FK_TENTITY_LASTMODIFIEDTIME_USER1");
-
-                    b.HasIndex(new[] { "Id" }, "IDX_TENTITYID")
-                        .HasDatabaseName("IDX_TENTITYID1");
-
-                    b.ToTable("user", (string)null);
+                    b.ToTable("e_user", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 24, 15, 7, 37, 557, DateTimeKind.Local).AddTicks(8626),
+                            CreatedTime = new DateTime(2023, 12, 27, 16, 10, 13, 580, DateTimeKind.Local).AddTicks(9745),
                             Email = "root@localhost",
                             Name = "Root",
                             Password = "abcd1234",
@@ -194,36 +178,19 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("uuid");
 
-                    b.Property<Guid>("CreatedByUserForeignKey")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(36)
-                        .HasColumnType("char(36)")
-                        .HasDefaultValue(new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"))
-                        .HasColumnName("created_by_uuid");
-
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 12, 24, 15, 7, 37, 565, DateTimeKind.Local).AddTicks(9370))
+                        .HasColumnType("datetime")
+                        .HasDefaultValue(new DateTime(2023, 12, 27, 16, 10, 13, 586, DateTimeKind.Local).AddTicks(8230))
                         .HasColumnName("created_time");
 
-                    b.Property<Guid?>("DeletedByUserForeignKey")
-                        .HasMaxLength(36)
-                        .HasColumnType("char(36)")
-                        .HasColumnName("deleted_by_uuid");
-
                     b.Property<DateTime?>("DeletedTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime")
                         .HasColumnName("deleted_time");
 
-                    b.Property<Guid?>("LastModifiedByUserForeignKey")
-                        .HasMaxLength(36)
-                        .HasColumnType("char(36)")
-                        .HasColumnName("modified_by_uuid");
-
                     b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("last_modified_time");
+                        .HasColumnType("datetime")
+                        .HasColumnName("modified_time");
 
                     b.Property<Guid>("RoleForeignKey")
                         .ValueGeneratedOnAdd()
@@ -237,29 +204,12 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("user_id");
 
-                    b.Property<Guid>("UsersId")
-                        .HasColumnType("char(36)");
-
                     b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.HasIndex("UsersId");
-
-                    b.HasIndex(new[] { "CreatedByUserForeignKey" }, "IDX_FK_TENTITY_CREATEDBYUSER_USER")
-                        .HasDatabaseName("IDX_FK_TENTITY_CREATEDBYUSER_USER2");
-
-                    b.HasIndex(new[] { "DeletedByUserForeignKey" }, "IDX_FK_TENTITY_DELETEDBYUSER_USER")
-                        .HasDatabaseName("IDX_FK_TENTITY_DELETEDBYUSER_USER2");
-
-                    b.HasIndex(new[] { "LastModifiedByUserForeignKey" }, "IDX_FK_TENTITY_LASTMODIFIEDTIME_USER")
-                        .HasDatabaseName("IDX_FK_TENTITY_LASTMODIFIEDTIME_USER2");
-
                     b.HasIndex(new[] { "RoleForeignKey" }, "IDX_FK_USERHASRELATIONTOROLE_ROLEFOREIGNKEY_ROLE");
 
-                    b.HasIndex(new[] { "UserForeignKey" }, "IDX_FK_USERHASRELATIONTOROLE_USERFOREIGNKEY_USER");
-
-                    b.HasIndex(new[] { "Id" }, "IDX_TENTITYID")
-                        .HasDatabaseName("IDX_TENTITYID2");
+                    b.HasIndex(new[] { "UserForeignKey" }, "IDX_FK_USERHASRELATIONTOROLE_USERFOREIGNKEY_EUSER");
 
                     b.ToTable("user_has_relation_to_role", (string)null);
                 });
@@ -271,17 +221,15 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("uuid");
 
-                    b.Property<Guid>("CreatedByUserForeignKey")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid?>("CreatedByUserForeignKey")
                         .HasMaxLength(36)
                         .HasColumnType("char(36)")
-                        .HasDefaultValue(new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"))
                         .HasColumnName("created_by_uuid");
 
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 12, 24, 15, 7, 37, 544, DateTimeKind.Local).AddTicks(1))
+                        .HasColumnType("datetime")
+                        .HasDefaultValue(new DateTime(2023, 12, 27, 16, 10, 13, 563, DateTimeKind.Local).AddTicks(3763))
                         .HasColumnName("created_time");
 
                     b.Property<Guid?>("DeletedByUserForeignKey")
@@ -290,7 +238,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasColumnName("deleted_by_uuid");
 
                     b.Property<DateTime?>("DeletedTime")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime")
                         .HasColumnName("deleted_time");
 
                     b.Property<Guid?>("LastModifiedByUserForeignKey")
@@ -299,8 +247,8 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasColumnName("modified_by_uuid");
 
                     b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("last_modified_time");
+                        .HasColumnType("datetime")
+                        .HasColumnName("modified_time");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -311,17 +259,11 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.HasIndex(new[] { "CreatedByUserForeignKey" }, "IDX_FK_TENTITY_CREATEDBYUSER_USER")
-                        .HasDatabaseName("IDX_FK_TENTITY_CREATEDBYUSER_USER3");
+                    b.HasIndex("CreatedByUserForeignKey");
 
-                    b.HasIndex(new[] { "DeletedByUserForeignKey" }, "IDX_FK_TENTITY_DELETEDBYUSER_USER")
-                        .HasDatabaseName("IDX_FK_TENTITY_DELETEDBYUSER_USER3");
+                    b.HasIndex("DeletedByUserForeignKey");
 
-                    b.HasIndex(new[] { "LastModifiedByUserForeignKey" }, "IDX_FK_TENTITY_LASTMODIFIEDTIME_USER")
-                        .HasDatabaseName("IDX_FK_TENTITY_LASTMODIFIEDTIME_USER3");
-
-                    b.HasIndex(new[] { "Id" }, "IDX_TENTITYID")
-                        .HasDatabaseName("IDX_TENTITYID3");
+                    b.HasIndex("LastModifiedByUserForeignKey");
 
                     b.ToTable("user_type", (string)null);
 
@@ -329,34 +271,36 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         new
                         {
                             Id = new Guid("c92db314-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedByUserForeignKey = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 24, 15, 7, 37, 544, DateTimeKind.Local).AddTicks(847),
+                            CreatedTime = new DateTime(2023, 12, 27, 16, 10, 13, 569, DateTimeKind.Local).AddTicks(6227),
                             Name = "User"
                         },
                         new
                         {
                             Id = new Guid("c3f257ff-1c85-4e3c-b6b2-21ef4afba71f"),
-                            CreatedByUserForeignKey = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 24, 15, 7, 37, 544, DateTimeKind.Local).AddTicks(850),
+                            CreatedTime = new DateTime(2023, 12, 27, 16, 10, 13, 569, DateTimeKind.Local).AddTicks(6233),
                             Name = "Root"
                         });
                 });
 
             modelBuilder.Entity("Shared.Entities.Roles.Role", b =>
                 {
-                    b.HasOne("Shared.Entities.Users.User", "CreatedByUser")
-                        .WithMany()
+                    b.HasOne("Shared.Entities.Users.EUser", "CreatedByUser")
+                        .WithMany("CreatedRoles")
                         .HasForeignKey("CreatedByUserForeignKey")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasConstraintName("FK_ROLE_CREATEDBYUSERFOREIGNKEY_TO_EUSER");
 
-                    b.HasOne("Shared.Entities.Users.User", "DeletedByUser")
-                        .WithMany()
-                        .HasForeignKey("DeletedByUserForeignKey");
+                    b.HasOne("Shared.Entities.Users.EUser", "DeletedByUser")
+                        .WithMany("DeletedRoles")
+                        .HasForeignKey("DeletedByUserForeignKey")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasConstraintName("FK_ROLE_DELETEDBYUSERFOREIGNKEY_TO_EUSER");
 
-                    b.HasOne("Shared.Entities.Users.User", "LastModifiedByUser")
-                        .WithMany()
-                        .HasForeignKey("LastModifiedByUserForeignKey");
+                    b.HasOne("Shared.Entities.Users.EUser", "LastModifiedByUser")
+                        .WithMany("ModifiedRoles")
+                        .HasForeignKey("LastModifiedByUserForeignKey")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasConstraintName("FK_ROLE_LASTMODIFIEDBYUSERFOREIGNKEY_TO_EUSER");
 
                     b.Navigation("CreatedByUser");
 
@@ -365,19 +309,17 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Navigation("LastModifiedByUser");
                 });
 
-            modelBuilder.Entity("Shared.Entities.Users.User", b =>
+            modelBuilder.Entity("Shared.Entities.Users.EUser", b =>
                 {
-                    b.HasOne("Shared.Entities.Users.User", "CreatedByUser")
+                    b.HasOne("Shared.Entities.Users.EUser", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedByUserForeignKey")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CreatedByUserForeignKey");
 
-                    b.HasOne("Shared.Entities.Users.User", "DeletedByUser")
+                    b.HasOne("Shared.Entities.Users.EUser", "DeletedByUser")
                         .WithMany()
                         .HasForeignKey("DeletedByUserForeignKey");
 
-                    b.HasOne("Shared.Entities.Users.User", "LastModifiedByUser")
+                    b.HasOne("Shared.Entities.Users.EUser", "LastModifiedByUser")
                         .WithMany()
                         .HasForeignKey("LastModifiedByUserForeignKey");
 
@@ -398,43 +340,18 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
 
             modelBuilder.Entity("Shared.Entities.Users.UserHasRelationToRole", b =>
                 {
-                    b.HasOne("Shared.Entities.Users.User", "CreatedByUser")
-                        .WithMany()
-                        .HasForeignKey("CreatedByUserForeignKey")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Shared.Entities.Users.User", "DeletedByUser")
-                        .WithMany()
-                        .HasForeignKey("DeletedByUserForeignKey");
-
-                    b.HasOne("Shared.Entities.Users.User", "LastModifiedByUser")
-                        .WithMany()
-                        .HasForeignKey("LastModifiedByUserForeignKey");
-
                     b.HasOne("Shared.Entities.Roles.Role", "Role")
                         .WithMany("UserHasRelationToRoles")
                         .HasForeignKey("RoleForeignKey")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_userRoleToRole");
 
-                    b.HasOne("Shared.Entities.Users.User", "User")
+                    b.HasOne("Shared.Entities.Users.EUser", "User")
                         .WithMany("UserHasRelationToRoles")
                         .HasForeignKey("UserForeignKey")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Shared.Entities.Users.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CreatedByUser");
-
-                    b.Navigation("DeletedByUser");
-
-                    b.Navigation("LastModifiedByUser");
 
                     b.Navigation("Role");
 
@@ -443,19 +360,23 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
 
             modelBuilder.Entity("Shared.Entities.Users.UserType", b =>
                 {
-                    b.HasOne("Shared.Entities.Users.User", "CreatedByUser")
-                        .WithMany()
+                    b.HasOne("Shared.Entities.Users.EUser", "CreatedByUser")
+                        .WithMany("CreatedUserTypes")
                         .HasForeignKey("CreatedByUserForeignKey")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasConstraintName("FK_USERTYPE_CREATEDBYUSERFOREIGNKEY_TO_EUSER");
 
-                    b.HasOne("Shared.Entities.Users.User", "DeletedByUser")
-                        .WithMany()
-                        .HasForeignKey("DeletedByUserForeignKey");
+                    b.HasOne("Shared.Entities.Users.EUser", "DeletedByUser")
+                        .WithMany("DeletedUserTypes")
+                        .HasForeignKey("DeletedByUserForeignKey")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasConstraintName("FK_USERTYPE_DELETEDBYUSERFOREIGNKEY_TO_EUSER");
 
-                    b.HasOne("Shared.Entities.Users.User", "LastModifiedByUser")
-                        .WithMany()
-                        .HasForeignKey("LastModifiedByUserForeignKey");
+                    b.HasOne("Shared.Entities.Users.EUser", "LastModifiedByUser")
+                        .WithMany("ModifiedUserTypes")
+                        .HasForeignKey("LastModifiedByUserForeignKey")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasConstraintName("FK_USERTYPE_LASTMODIFIEDBYUSERFOREIGNKEY_TO_EUSER");
 
                     b.Navigation("CreatedByUser");
 
@@ -469,8 +390,20 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Navigation("UserHasRelationToRoles");
                 });
 
-            modelBuilder.Entity("Shared.Entities.Users.User", b =>
+            modelBuilder.Entity("Shared.Entities.Users.EUser", b =>
                 {
+                    b.Navigation("CreatedRoles");
+
+                    b.Navigation("CreatedUserTypes");
+
+                    b.Navigation("DeletedRoles");
+
+                    b.Navigation("DeletedUserTypes");
+
+                    b.Navigation("ModifiedRoles");
+
+                    b.Navigation("ModifiedUserTypes");
+
                     b.Navigation("UserHasRelationToRoles");
                 });
 

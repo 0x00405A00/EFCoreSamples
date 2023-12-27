@@ -20,14 +20,14 @@ namespace EFCoreMigrationTestWithInheritence_SqlLite.DatabaseConfiguration
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
                 .HasColumnName("id")
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserTypeId(fromDb));
+                .HasConversion(toDb => toDb.Uuid, fromDb => new UserTypeIdent(fromDb));
 
             builder.Property(ut => ut.Name)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Names);
 
-            var userType1 = new UserType { Id = new UserTypeId(Guid.NewGuid()), Name = "User" };
-            var userType2 = new UserType { Id = new UserTypeId(Guid.NewGuid()), Name = "Root" };
+            var userType1 = new UserType { Id = new UserTypeIdent(Guid.NewGuid()), Name = "User" };
+            var userType2 = new UserType { Id = new UserTypeIdent(Guid.NewGuid()), Name = "Root" };
             builder.HasData(userType1, userType2);
         }
     }

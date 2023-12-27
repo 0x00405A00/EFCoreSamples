@@ -1,20 +1,17 @@
-﻿using Shared.Entities.Users;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace Shared.Primitives
 {
-    public abstract class Entity
+    public abstract class Entity : IEntityBase
     {
-        public UserId CreatedByUserForeignKey { get; set; }
-        public UserId? LastModifiedByUserForeignKey { get; set; }
-        public UserId? DeletedByUserForeignKey { get; set; }
-        public User CreatedByUser { get; set; }
-        public User? LastModifiedByUser { get; set; }
-        public User? DeletedByUser { get; set; }
         public CustomDateTime CreatedTime { get; set; }
         public CustomDateTime? LastModifiedTime { get; set; }
         public CustomDateTime? DeletedTime { get; set; }
 
+        protected Entity()
+        {
+
+        }
         protected void SetValueInInstance<TEntity>(object instance, object value, Expression<Func<TEntity, object>> propertyExpression)
         {
 
@@ -38,12 +35,15 @@ namespace Shared.Primitives
         }
     }
 
-    public abstract class Entity<TEntityId> : Entity, IEquatable<Entity<TEntityId>>
-        where TEntityId : Identification
+    public abstract class Entity<TEntityId> : Entity, IEquatable<Entity<TEntityId>>, IEntityWithTypedId<TEntityId> where TEntityId : Identification
     {
         public TEntityId Id { get; set; }
         public static TEntityId NewId() => (TEntityId)Identification.Create();
 
+        protected Entity() : base()
+        {
+
+        }
         public static bool operator !=(Entity<TEntityId>? first, Entity<TEntityId>? second)
         {
             if (ReferenceEquals(first, null) && ReferenceEquals(second, null)) return false;

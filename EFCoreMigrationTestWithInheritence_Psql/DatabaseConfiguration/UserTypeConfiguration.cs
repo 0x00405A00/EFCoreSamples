@@ -26,8 +26,8 @@ namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Names);
 
-            var userType1 = new UserType { Id = new UserTypeId(UserConst.UserType.User), Name = "User" };
-            var userType2 = new UserType { Id = new UserTypeId(UserConst.UserType.Root), Name = "Root" };
+            var userType1 = new UserType { Id = new UserTypeIdent(UserConst.UserType.User), Name = "User" };
+            var userType2 = new UserType { Id = new UserTypeIdent(UserConst.UserType.Root), Name = "Root" };
             builder.HasData(userType1, userType2);
         }
     }

@@ -25,7 +25,7 @@ namespace EFCoreMigrationTestWithInheritence_Psql.Pages
         }
         public async Task<IActionResult> OnPostTestEFCore()
         {
-            var DbSet = dbContext.Set<User>();
+            var DbSet = dbContext.Set<EUser>();
             //Synchron Tests
             var testUserSelect = DbSet
                 .Include(x => x.UserHasRelationToRoles)
@@ -61,16 +61,16 @@ namespace EFCoreMigrationTestWithInheritence_Psql.Pages
             //DML Tests->Insert new Entity
             var randNumber = Random.Shared.Next(testUsersSelectAsync.Count, testUsersSelectAsync.Count * 2);
             var name = $"{testUserSelectAsync.Name}_{randNumber}";
-            User newUser = new User()
+            EUser newUser = new User()
             {
                 Name = name,
                 Password = testUserSelectAsync.Password,
                 //CreatedTime = DateTime.Now,
                 Email = $"{name}@test.com",
-                UserTypeId = new UserTypeId(UserConst.UserType.User),
-                Id = new UserId(Guid.NewGuid())
+                UserTypeId = new UserTypeIdent(UserConst.UserType.User),
+                Id = new UserIdent(Guid.NewGuid())
             };
-            await dbContext.Set<User>().AddAsync(newUser);
+            await dbContext.Set<EUser>().AddAsync(newUser);
             await dbContext.SaveChangesAsync();
             return new OkResult();
         }

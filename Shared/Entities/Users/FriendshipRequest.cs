@@ -1,4 +1,5 @@
 ﻿using Shared.Primitives;
+using Shared.ValueObjects.Ids;
 
 namespace Shared.Entities.Users
 {
@@ -8,16 +9,16 @@ namespace Shared.Entities.Users
         public UserId TargetUserForeignKey { get; set; }
         public UserId CreatedByUserForeignKey { get; set; }
 
-        public User RequestUser { get; private set; }
-        public User TargetUser { get; private set; }
-        public User CreatedByUser { get; private set; }
+        public EUser RequestUser { get; set; }
+        public EUser TargetUser { get; set; }
+        public EUser CreatedByUser { get; set; }
 
-        public string? TargetUserRequestMessage { get; private set; }
-        public CustomDateTime? CreatedTime { get; private set; }
+        public string? TargetUserRequestMessage { get; set; }
+        public CustomDateTime? CreatedTime { get; set; }
 
         //public ICollection<User> Users { get; } = new List<User>();
 
-        public FriendshipRequest() 
+        private FriendshipRequest() : base() 
         { 
 
         }

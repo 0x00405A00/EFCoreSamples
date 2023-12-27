@@ -14,7 +14,7 @@ namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration
             builder.ToTable(tableName);
             builder.HasKey(ut => new { ut.RoleForeignKey, ut.UserForeignKey });
 
-            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole),nameof(UserHasRelationToRole.Id),nameof(User));
+            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole),nameof(UserHasRelationToRole.Id),nameof(EUser));
             builder.HasIndex(e => e.UserForeignKey, fk1Index);
 
             var fk2Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.Id), nameof(Role));
@@ -23,23 +23,23 @@ namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration
             builder.Property(ut => ut.Id)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserHasRelationToRoleId(fromDb))
+                .HasConversion(toDb => toDb.Uuid, fromDb => new UserHasRelationToRoleIdent(fromDb))
                 .HasColumnName(DbContextExtension.UuidName);
 
             builder.Property(ut => ut.RoleForeignKey)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasDefaultValue(new RoleId(Shared.Const.UserConst.Role.User))
-                .HasConversion(toDb => toDb.Uuid, fromDb => new RoleId(fromDb))
+                .HasDefaultValue(new RoleIdent(Shared.Const.UserConst.Role.User))
+                .HasConversion(toDb => toDb.Uuid, fromDb => new RoleIdent(fromDb))
                 .HasColumnName("role_id");
 
             builder.Property(ut => ut.UserForeignKey)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
+                .HasConversion(toDb => toDb.Uuid, fromDb => new UserIdent(fromDb))
                 .HasColumnName("user_id");
 
-            var userRelationToUserFkName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToRole),nameof(UserHasRelationToRole.UserForeignKey), nameof(User));
+            var userRelationToUserFkName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToRole),nameof(UserHasRelationToRole.UserForeignKey), nameof(EUser));
             builder.HasOne(d => d.User)
                 .WithMany(p => p.UserHasRelationToRoles)
                 .HasForeignKey(d => d.UserForeignKey)

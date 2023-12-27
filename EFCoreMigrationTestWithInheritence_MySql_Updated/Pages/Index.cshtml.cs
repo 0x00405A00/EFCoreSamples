@@ -1,9 +1,10 @@
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Shared.Const;
 using Shared.Entities.Users;
+using Shared.Primitives;
+using Shared.ValueObjects.Ids;
 
 namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Pages
 {
@@ -29,7 +30,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Pages
         {
 
 
-            var DbSet = dbContext.Set<User>();
+            var DbSet = dbContext.Set<EUser>();
             //Synchron Tests
             var testUserSelect = DbSet
                 .Include(x => x.UserHasRelationToRoles)
@@ -66,16 +67,19 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Pages
             //DML Tests->Insert new Entity
             var randNumber = Random.Shared.Next(testUsersSelectAsync.Count, testUsersSelectAsync.Count * 2);
             var name = $"{testUserSelectAsync.Name}_{randNumber}";
-            User newUser = new User()
-            {
-                Name = name,
-                Password = testUserSelectAsync.Password,
-                //CreatedTime = DateTime.Now,
-                Email = $"{name}@test.com",
-                //UserTypeId = new UserTypeId(UserConst.UserType.User),
-                Id = new UserId(Guid.NewGuid())
-            };
-            await dbContext.Set<User>().AddAsync(newUser);
+            EUser newUser = EUser.Create(
+                new UserId(UserConst.RootUserId),
+                name,
+                 $"{name}@test.com",
+                testUserSelectAsync.Password,
+                new UserTypeId(Guid.NewGuid()),
+                new CustomDateTime(DateTime.Now),
+                null,
+                null,
+                null,
+                null,
+                null); 
+            await dbContext.Set<EUser>().AddAsync(newUser);
             await dbContext.SaveChangesAsync();
             return new OkResult();
         }
