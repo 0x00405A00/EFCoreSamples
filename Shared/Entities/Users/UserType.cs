@@ -3,9 +3,9 @@ using Shared.ValueObjects.Ids;
 
 namespace Shared.Entities.Users
 {
-    public class UserType : AuditableEntity<UserTypeId>
+    public sealed class UserType : AuditableEntity<UserTypeId>
     {
-        public string Name { get; set; }
+        public string Name { get; private set; }
         public ICollection<EUser>? Users { get; }
         private UserType() : base()
         { 

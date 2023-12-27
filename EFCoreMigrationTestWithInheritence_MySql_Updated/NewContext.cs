@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Options;
 using Shared.EFCore;
+using Shared.Entities.Auths;
 using Shared.Entities.Roles;
 using Shared.Entities.Users;
 using Shared.Primitives;
@@ -25,6 +26,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated
         public DbSet<UserHasRelationToRole> UserHasRelationToRoles { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
         public DbSet<EUser> Users { get; set; }
+        public DbSet<Auth> Auths { get; set; }
         #endregion
         #region Ctor
         /*public NewContext() : base()
@@ -69,6 +71,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new UserHasRelationToRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new AuthConfiguration());
 
 
             //modelBuilder.ApplyConfigurationsFromAssembly ignore any order so dependencies which are order depend could not be created (app runs in exception)

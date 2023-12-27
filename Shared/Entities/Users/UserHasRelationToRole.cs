@@ -4,10 +4,10 @@ using Shared.ValueObjects.Ids;
 
 namespace Shared.Entities.Users
 {
-    public class UserHasRelationToRole : Entity<UserHasRelationToRoleId>
+    public sealed class UserHasRelationToRole : Entity<UserHasRelationToRoleId>
     {
-        public UserId UserForeignKey { get; set; }
-        public RoleId RoleForeignKey { get; set; }
+        public UserId UserForeignKey { get; private set; }
+        public RoleId RoleForeignKey { get; private set; }
         public EUser User { get; set; }
         public Role Role { get; set; }
 

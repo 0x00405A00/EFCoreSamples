@@ -1,36 +1,25 @@
-﻿using Shared.Entities.Roles;
+﻿using Shared.Entities.Auths;
+using Shared.Entities.Roles;
 using Shared.Primitives;
 using Shared.ValueObjects.Ids;
 
 namespace Shared.Entities.Users
 {
-    public class EUser : AuditableEntity<UserId>
+    /// <summary>
+    /// Base class for EUser, Navigations should be in 'public sealed partial class EUser'
+    /// </summary>
+    public sealed partial class EUser : AuditableEntity<UserId>
     {
-        public UserId? CreatedByUserForeignKey { get; set; }
-        public UserId? LastModifiedByUserForeignKey { get; set; }
-        public UserId? DeletedByUserForeignKey { get; set; }
-        public EUser? CreatedByUser { get; set; }
-        public EUser? LastModifiedByUser { get; set; }
-        public EUser? DeletedByUser { get; set; }
+        public UserId? CreatedByUserForeignKey { get; private set; }
+        public UserId? LastModifiedByUserForeignKey { get; private set; }
+        public UserId? DeletedByUserForeignKey { get; private set; }
 
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string Name { get; private set; }
+        public string Email { get; private set; }
+        public string Password { get; private set; }
 
-        public UserTypeId UserTypeId { get; set; }//<------- FK
-        public UserType UserType { get; set; }//<---- Navigation Property
-        public ICollection<UserHasRelationToRole> UserHasRelationToRoles { get; }
-        public ICollection<Role> Roles { get; }
-        public virtual ICollection<UserType>? CreatedUserTypes { get; }
-        public virtual ICollection<UserType>? ModifiedUserTypes { get; }
-        public virtual ICollection<UserType>? DeletedUserTypes { get; }
+        public UserTypeId UserTypeId { get; private set; }//<------- FK
 
-        public virtual ICollection<Role>? CreatedRoles { get; }
-        public virtual ICollection<Role>? ModifiedRoles { get; }
-        public virtual ICollection<Role>? DeletedRoles { get; }
-
-        //public ICollection<UserFriend> UserFriends { get; } = new List<UserFriend>();
-        //public ICollection<FriendshipRequest> FriendshipRequests { get; } = new List<FriendshipRequest>();
         private EUser() : base()
         {
 
@@ -86,5 +75,30 @@ namespace Shared.Entities.Users
                 deletedDateTime,
                 deletedBy);
         }
+
+        public void SetName(string name) { Name = name; }
+    }
+
+    /// <summary>
+    /// For Navigations
+    /// </summary>
+    public sealed partial class EUser
+    {
+        public EUser? CreatedByUser { get; }
+        public EUser? LastModifiedByUser { get; }
+        public EUser? DeletedByUser { get; }
+        public UserType UserType { get; set; }//<---- Navigation Property must have the accessors get; set;
+        public ICollection<UserHasRelationToRole> UserHasRelationToRoles { get; }
+        public ICollection<Role> Roles { get; }
+        public ICollection<UserType>? CreatedUserTypes { get; }
+        public ICollection<UserType>? ModifiedUserTypes { get; }
+        public ICollection<UserType>? DeletedUserTypes { get; }
+        public ICollection<Role>? CreatedRoles { get; }
+        public ICollection<Role>? ModifiedRoles { get; }
+        public ICollection<Role>? DeletedRoles { get; }
+        public ICollection<Auth>? Auths { get; }
+
+        //public ICollection<UserFriend> UserFriends { get; } = new List<UserFriend>();
+        //public ICollection<FriendshipRequest> FriendshipRequests { get; } = new List<FriendshipRequest>();
     }
 }

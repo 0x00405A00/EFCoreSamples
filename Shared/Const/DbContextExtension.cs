@@ -79,13 +79,6 @@ namespace Shared.Const
 
         public static EUser GetRootUser()
         {
-            /*
-                Name = "Root",
-                Password = "abcd1234",
-                CreatedTime = new CustomDateTime(DateTime.Now),
-                Email = $"root@localhost",
-                UserTypeId = new UserTypeId(UserConst.UserType.Root),
-                Id = new UserId(UserConst.RootUserId)             */
             EUser rootUser = EUser.Create(
                 new UserId(UserConst.RootUserId),
                 "Root",

@@ -19,6 +19,92 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                 .HasAnnotation("ProductVersion", "7.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("Shared.Entities.Auths.Auth", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("char(36)")
+                        .HasColumnName("uuid");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValue(new DateTime(2023, 12, 27, 16, 58, 21, 460, DateTimeKind.Local).AddTicks(522))
+                        .HasColumnName("created_time");
+
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime")
+                        .HasColumnName("deleted_time");
+
+                    b.Property<DateTime?>("LastModifiedTime")
+                        .HasColumnType("datetime")
+                        .HasColumnName("modified_time");
+
+                    b.Property<string>("LocalIp")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)")
+                        .HasColumnName("local_ip");
+
+                    b.Property<uint>("LocalIpPort")
+                        .HasMaxLength(5)
+                        .HasColumnType("int unsigned")
+                        .HasColumnName("local_port");
+
+                    b.Property<DateTime?>("LogoutTime")
+                        .HasColumnType("datetime")
+                        .HasColumnName("logout_time");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("refresh_token");
+
+                    b.Property<DateTime>("RefreshTokenExpiresIn")
+                        .HasColumnType("datetime")
+                        .HasColumnName("refresh_token_expires_in");
+
+                    b.Property<string>("RemoteIp")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)")
+                        .HasColumnName("remote_ip");
+
+                    b.Property<uint>("RemoteIpPort")
+                        .HasMaxLength(5)
+                        .HasColumnType("int unsigned")
+                        .HasColumnName("remote_port");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("token");
+
+                    b.Property<DateTime>("TokenExpiresIn")
+                        .HasColumnType("datetime")
+                        .HasColumnName("token_expires_in");
+
+                    b.Property<string>("UserAgent")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("browser_user_agent");
+
+                    b.Property<Guid>("UserId")
+                        .HasMaxLength(36)
+                        .HasColumnType("char(36)")
+                        .HasColumnName("user_uuid");
+
+                    b.HasKey("Id")
+                        .HasName("PRIMARY");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("auth", (string)null);
+                });
+
             modelBuilder.Entity("Shared.Entities.Roles.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -34,7 +120,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 27, 16, 10, 13, 581, DateTimeKind.Local).AddTicks(5539))
+                        .HasDefaultValue(new DateTime(2023, 12, 27, 16, 58, 21, 451, DateTimeKind.Local).AddTicks(6427))
                         .HasColumnName("created_time");
 
                     b.Property<Guid?>("DeletedByUserForeignKey")
@@ -75,13 +161,13 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         new
                         {
                             Id = new Guid("c3f357ff-1c85-4e3c-b6b2-21ef4afba71f"),
-                            CreatedTime = new DateTime(2023, 12, 27, 16, 10, 13, 586, DateTimeKind.Local).AddTicks(3721),
+                            CreatedTime = new DateTime(2023, 12, 27, 16, 58, 21, 458, DateTimeKind.Local).AddTicks(5833),
                             Name = "Admin"
                         },
                         new
                         {
                             Id = new Guid("c92db414-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 27, 16, 10, 13, 586, DateTimeKind.Local).AddTicks(3727),
+                            CreatedTime = new DateTime(2023, 12, 27, 16, 58, 21, 458, DateTimeKind.Local).AddTicks(5837),
                             Name = "User"
                         });
                 });
@@ -101,7 +187,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 27, 16, 10, 13, 571, DateTimeKind.Local).AddTicks(1081))
+                        .HasDefaultValue(new DateTime(2023, 12, 27, 16, 58, 21, 436, DateTimeKind.Local).AddTicks(2976))
                         .HasColumnName("created_time");
 
                     b.Property<Guid?>("DeletedByUserForeignKey")
@@ -163,7 +249,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         new
                         {
                             Id = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 27, 16, 10, 13, 580, DateTimeKind.Local).AddTicks(9745),
+                            CreatedTime = new DateTime(2023, 12, 27, 16, 58, 21, 450, DateTimeKind.Local).AddTicks(8400),
                             Email = "root@localhost",
                             Name = "Root",
                             Password = "abcd1234",
@@ -181,7 +267,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 27, 16, 10, 13, 586, DateTimeKind.Local).AddTicks(8230))
+                        .HasDefaultValue(new DateTime(2023, 12, 27, 16, 58, 21, 459, DateTimeKind.Local).AddTicks(1945))
                         .HasColumnName("created_time");
 
                     b.Property<DateTime?>("DeletedTime")
@@ -229,7 +315,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 27, 16, 10, 13, 563, DateTimeKind.Local).AddTicks(3763))
+                        .HasDefaultValue(new DateTime(2023, 12, 27, 16, 58, 21, 425, DateTimeKind.Local).AddTicks(6521))
                         .HasColumnName("created_time");
 
                     b.Property<Guid?>("DeletedByUserForeignKey")
@@ -271,15 +357,26 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         new
                         {
                             Id = new Guid("c92db314-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 27, 16, 10, 13, 569, DateTimeKind.Local).AddTicks(6227),
+                            CreatedTime = new DateTime(2023, 12, 27, 16, 58, 21, 433, DateTimeKind.Local).AddTicks(5682),
                             Name = "User"
                         },
                         new
                         {
                             Id = new Guid("c3f257ff-1c85-4e3c-b6b2-21ef4afba71f"),
-                            CreatedTime = new DateTime(2023, 12, 27, 16, 10, 13, 569, DateTimeKind.Local).AddTicks(6233),
+                            CreatedTime = new DateTime(2023, 12, 27, 16, 58, 21, 433, DateTimeKind.Local).AddTicks(5690),
                             Name = "Root"
                         });
+                });
+
+            modelBuilder.Entity("Shared.Entities.Auths.Auth", b =>
+                {
+                    b.HasOne("Shared.Entities.Users.EUser", "User")
+                        .WithMany("Auths")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasConstraintName("FK_AUTH_USERID_TO_EUSER");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Shared.Entities.Roles.Role", b =>
@@ -392,6 +489,8 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
 
             modelBuilder.Entity("Shared.Entities.Users.EUser", b =>
                 {
+                    b.Navigation("Auths");
+
                     b.Navigation("CreatedRoles");
 
                     b.Navigation("CreatedUserTypes");

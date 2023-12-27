@@ -3,10 +3,10 @@ using Shared.ValueObjects.Ids;
 
 namespace Shared.Entities.Users
 {
-    public class UserFriend : Entity<UserFriendId>
+    public sealed class UserFriend : Entity<UserFriendId>
     {
-        public UserId UserForeignKey { get; set; }
-        public UserId FriendForeignKey { get; set; }
+        public UserId UserForeignKey { get; private set; }
+        public UserId FriendForeignKey { get; private set; }
 
         public EUser User { get; set; }
         public EUser Friend { get; set; }

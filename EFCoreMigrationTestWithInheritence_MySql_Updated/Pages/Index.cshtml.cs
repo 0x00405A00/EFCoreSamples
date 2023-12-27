@@ -44,10 +44,10 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Pages
 
             //Asynchron Tests
             const string newName = "Root_xyz";
-            var testUserSelectAsync = await dbContext.Users.Where(x => x.Name == "Test")
+            EUser testUserSelectAsync = await dbContext.Users.Where(x => x.Name == "Test")
                                                  .FirstOrDefaultAsync();
 
-            testUserSelectAsync.Name = newName;
+            testUserSelectAsync.SetName(newName);
             await dbContext.SaveChangesAsync();
 
             var testUsersSelectAsync = await dbContext.Users.Where(x => x.Name.StartsWith("Test_"))
@@ -60,7 +60,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Pages
                                                       .FirstOrDefault();
 
 
-            testUserSelectAsync.Name = newName.Substring(0, newName.Length - 4);
+            testUserSelectAsync.SetName(newName.Substring(0, newName.Length - 4));
             await dbContext.SaveChangesAsync();
 
 

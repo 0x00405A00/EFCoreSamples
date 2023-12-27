@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EFCoreMigrationTestWithInheritence_MySql_Updated")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6d7094fe3d332cf3e1bf43fe6bae1b6ba78079e8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5eb470a0abd500ca6f53aac344d69e5c18279d09")]
 [assembly: System.Reflection.AssemblyProductAttribute("EFCoreMigrationTestWithInheritence_MySql_Updated")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EFCoreMigrationTestWithInheritence_MySql_Updated")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
