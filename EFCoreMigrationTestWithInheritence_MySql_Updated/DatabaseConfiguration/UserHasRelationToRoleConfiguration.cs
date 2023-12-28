@@ -24,13 +24,11 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
                 .HasDefaultValue(new RoleId(Shared.Const.UserConst.Role.User))
-                .HasConversion(toDb => toDb.Uuid, fromDb => new RoleId(fromDb))
                 .HasColumnName("role_id");
             
             builder.Property(ut => ut.UserForeignKey)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
                 .HasColumnName("user_id");
         }
     }

@@ -22,13 +22,11 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
             builder.Property(ut => ut.RequestUserForeignKey)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
                 .HasColumnName("requester_id");
 
             builder.Property(ut => ut.TargetUserForeignKey)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
                 .HasColumnName("target_id");
 
             builder.Property(ut => ut.TargetUserRequestMessage)
@@ -42,7 +40,6 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
             string constraintRightName = DbContextExtension.GetForeignKeyName(nameof(FriendshipRequest), nameof(FriendshipRequest.TargetUserForeignKey), nameof(EUser));
             builder.HasOne(e => e.RequesterUser).WithMany(x => x.FriendshipRequestsWhereIamRequester).HasForeignKey(x => x.RequestUserForeignKey).HasConstraintName(constraintLeftName).OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(t => t.TargetUser).WithMany(e => e.FriendshipRequestsWhereIamTarget).HasForeignKey(e => e.TargetUserForeignKey).HasConstraintName(constraintRightName).OnDelete(DeleteBehavior.Cascade);
-
         }
     }
 }

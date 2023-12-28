@@ -73,7 +73,8 @@ namespace Shared.Entities.Chats
     }
     public sealed partial class Chat
     {
-        public ICollection<ChatRelationToUser> ChatRelationToUsers { get; }
-        public ICollection<Message> Messages { get; }
+        public ICollection<ChatRelationToUser>? ChatRelationToUsers { get; }
+        public ICollection<ChatInviteRequest>? ChatInvitesToUsers { get; }
+        public ICollection<Message>? Messages { get; }
     }
 }

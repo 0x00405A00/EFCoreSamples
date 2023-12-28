@@ -17,7 +17,6 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
             builder.Property(ut => ut.UserId)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb=> toDb.Uuid,fromDb=>new UserId(fromDb))
                 .HasColumnName("user_uuid");
 
             builder.Property(ut => ut.RemoteIp)

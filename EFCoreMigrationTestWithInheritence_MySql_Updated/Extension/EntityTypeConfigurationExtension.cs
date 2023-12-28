@@ -48,16 +48,16 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Extension
             builder.Property(ut => ut.CreatedByUserForeignKey)
                 .IsRequired(false)
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
+                //.HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
                 .HasColumnName(DbContextExtension.ColumnNameDefinitions.UserSpecific.CreatedByUser);
             builder.Property(ut => ut.LastModifiedByUserForeignKey)
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
+                //.HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
                 .IsRequired(false)
                 .HasColumnName(DbContextExtension.ColumnNameDefinitions.UserSpecific.ModifiedByUser);
             builder.Property(ut => ut.DeletedByUserForeignKey)
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
+                //.HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
                 .IsRequired(false)
                 .HasColumnName(DbContextExtension.ColumnNameDefinitions.UserSpecific.DeletedByUser);
             return builder;

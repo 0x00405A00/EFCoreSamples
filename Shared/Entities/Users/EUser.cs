@@ -113,6 +113,9 @@ namespace Shared.Entities.Users
         public ICollection<FriendshipRequest>? FriendshipRequestsWhereIamRequester { get; }
         public ICollection<FriendshipRequest>? FriendshipRequestsWhereIamTarget { get; }
 
+        public ICollection<ChatInviteRequest>? ChatInvitesWhereIamRequester { get; }
+        public ICollection<ChatInviteRequest>? ChatInvitesWhereIamTarget { get; }
+
         public ICollection<UserType>? CreatedUserTypes { get; }
         public ICollection<UserType>? ModifiedUserTypes { get; }
         public ICollection<UserType>? DeletedUserTypes { get; }

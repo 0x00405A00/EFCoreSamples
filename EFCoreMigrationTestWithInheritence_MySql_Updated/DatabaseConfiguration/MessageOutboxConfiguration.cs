@@ -17,13 +17,11 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
             builder.Property(ut => ut.UserForeignKey)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
                 .HasColumnName("user_id");
 
             builder.Property(ut => ut.MessageForeignKey)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new MessageId(fromDb))
                 .HasColumnName("message_id");
 
             string messageOutboxRelationToUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(MessageOutbox), nameof(MessageOutbox.UserForeignKey), nameof(EUser));
