@@ -20,7 +20,7 @@ namespace EFCoreMigrationTestWithInheritence.DatabaseConfiguration
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
                 .HasColumnName("id")
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserTypeIdent(fromDb));
+                .HasConversion(toDb => toDb.Id, fromDb => new UserTypeIdent(fromDb));
 
             builder.Property(ut => ut.Name)
                 .IsRequired()

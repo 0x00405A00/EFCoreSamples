@@ -21,7 +21,7 @@ namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration
             builder.Property(ut => ut.Id)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserIdent(fromDb))
+                .HasConversion(toDb => toDb.Id, fromDb => new UserIdent(fromDb))
                 .HasColumnName(DbContextExtension.UuidName);
 
             builder.Property(ut => ut.Name)

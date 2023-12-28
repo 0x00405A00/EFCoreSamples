@@ -135,3 +135,5 @@ C:\Users\Mika\source\repos\EFCoreSamples\EFCoreMigrationTestWithInheritence_MySq
 C:\Users\Mika\source\repos\EFCoreSamples\EFCoreMigrationTestWithInheritence_MySql_Updated\obj\Debug\net8.0\EFCoreMigrationTestWithInheritence_MySql_Updated.pdb
 C:\Users\Mika\source\repos\EFCoreSamples\EFCoreMigrationTestWithInheritence_MySql_Updated\obj\Debug\net8.0\EFCoreMigrationTestWithInheritence_MySql_Updated.genruntimeconfig.cache
 C:\Users\Mika\source\repos\EFCoreSamples\EFCoreMigrationTestWithInheritence_MySql_Updated\obj\Debug\net8.0\ref\EFCoreMigrationTestWithInheritence_MySql_Updated.dll
+C:\Users\Mika\source\repos\EFCoreSamples\EFCoreMigrationTestWithInheritence_MySql_Updated\bin\Debug\net8.0\MediatR.dll
+C:\Users\Mika\source\repos\EFCoreSamples\EFCoreMigrationTestWithInheritence_MySql_Updated\bin\Debug\net8.0\MediatR.Contracts.dll

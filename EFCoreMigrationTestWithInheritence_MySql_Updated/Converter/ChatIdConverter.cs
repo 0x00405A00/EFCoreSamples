@@ -7,7 +7,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Converter
     {
         public ChatIdConverter()
             : base(
-                v => v.Uuid,
+                v => v.Id,
                 v => new ChatId(v))
         {
         }

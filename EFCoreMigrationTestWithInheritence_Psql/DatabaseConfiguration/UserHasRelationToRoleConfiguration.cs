@@ -23,7 +23,7 @@ namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration
             builder.Property(ut => ut.Id)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserHasRelationToRoleIdent(fromDb))
+                .HasConversion(toDb => toDb.Id, fromDb => new UserHasRelationToRoleIdent(fromDb))
                 .HasColumnName(DbContextExtension.UuidName);
 
             builder.Property(ut => ut.RoleForeignKey)
@@ -36,7 +36,7 @@ namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration
             builder.Property(ut => ut.UserForeignKey)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserIdent(fromDb))
+                .HasConversion(toDb => toDb.Id, fromDb => new UserIdent(fromDb))
                 .HasColumnName("user_id");
 
             var userRelationToUserFkName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToRole),nameof(UserHasRelationToRole.UserForeignKey), nameof(EUser));

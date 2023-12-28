@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "5fjYKGUP39sq97MUzFxxwgQ9WQkytc9Eyxm/wYIddHF+zseKiXdzvLj5228UeY2Ozqv0P/p3qhB0Pw0+HvR8eg==",
+  "dgSpecHash": "ifHzQPZK07QeGb1jXmTFs6fyMlVL2pPUbfLqogFRyAYSk0POLQySvSBASHrZugqyan31XN5FZG5KQZnmTbZ38A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mika\\source\\repos\\EFCoreSamples\\EFCoreMigrationTestWithInheritence_Psql\\EFCoreMigrationTestWithInheritence_Psql.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mika\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\Mika\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Mika\\.nuget\\packages\\mediatr\\12.2.0\\mediatr.12.2.0.nupkg.sha512",
+    "C:\\Users\\Mika\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\Mika\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\Mika\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",
     "C:\\Users\\Mika\\.nuget\\packages\\microsoft.codeanalysis.common\\4.5.0\\microsoft.codeanalysis.common.4.5.0.nupkg.sha512",

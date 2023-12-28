@@ -29,7 +29,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 28, 3, 21, 47, 367, DateTimeKind.Local).AddTicks(3688))
+                        .HasDefaultValue(new DateTime(2023, 12, 28, 13, 43, 35, 576, DateTimeKind.Local).AddTicks(5919))
                         .HasColumnName("created_time");
 
                     b.Property<DateTime?>("DeletedTime")
@@ -120,7 +120,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 28, 3, 21, 47, 367, DateTimeKind.Local).AddTicks(6654))
+                        .HasDefaultValue(new DateTime(2023, 12, 28, 13, 43, 35, 576, DateTimeKind.Local).AddTicks(9010))
                         .HasColumnName("created_time");
 
                     b.Property<Guid?>("DeletedByUserForeignKey")
@@ -194,7 +194,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 28, 3, 21, 47, 373, DateTimeKind.Local).AddTicks(7043))
+                        .HasDefaultValue(new DateTime(2023, 12, 28, 13, 43, 35, 582, DateTimeKind.Local).AddTicks(8862))
                         .HasColumnName("created_time");
 
                     b.Property<Guid?>("DeletedByUserForeignKey")
@@ -279,7 +279,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 28, 3, 21, 47, 382, DateTimeKind.Local).AddTicks(5322))
+                        .HasDefaultValue(new DateTime(2023, 12, 28, 13, 43, 35, 592, DateTimeKind.Local).AddTicks(2417))
                         .HasColumnName("created_time");
 
                     b.Property<Guid?>("DeletedByUserForeignKey")
@@ -340,7 +340,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 28, 3, 21, 47, 392, DateTimeKind.Local).AddTicks(9384))
+                        .HasDefaultValue(new DateTime(2023, 12, 28, 13, 43, 35, 601, DateTimeKind.Local).AddTicks(8419))
                         .HasColumnName("created_time");
 
                     b.Property<DateTime?>("DeletedTime")
@@ -363,6 +363,111 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.ToTable("message_outbox", (string)null);
                 });
 
+            modelBuilder.Entity("Shared.Entities.Mail.EmailType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("char(36)")
+                        .HasColumnName("uuid");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValue(new DateTime(2023, 12, 28, 13, 43, 35, 609, DateTimeKind.Local).AddTicks(795))
+                        .HasColumnName("created_time");
+
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime")
+                        .HasColumnName("deleted_time");
+
+                    b.Property<DateTime?>("LastModifiedTime")
+                        .HasColumnType("datetime")
+                        .HasColumnName("modified_time");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("varchar(64)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id")
+                        .HasName("PRIMARY");
+
+                    b.ToTable("email_type", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c4f357ff-1c85-4e3c-b6b2-21ef4afba71f"),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 609, DateTimeKind.Local).AddTicks(1474),
+                            Name = "to"
+                        },
+                        new
+                        {
+                            Id = new Guid("c62db414-765b-46dd-bf40-ef7d5a5abd7b"),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 609, DateTimeKind.Local).AddTicks(1485),
+                            Name = "cc"
+                        },
+                        new
+                        {
+                            Id = new Guid("c52db414-765b-46dd-bf40-ef7d5a5abd7b"),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 609, DateTimeKind.Local).AddTicks(1487),
+                            Name = "bcc"
+                        });
+                });
+
+            modelBuilder.Entity("Shared.Entities.Mail.MailOutbox", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("char(36)")
+                        .HasColumnName("uuid");
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("varchar(64)")
+                        .HasColumnName("body");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValue(new DateTime(2023, 12, 28, 13, 43, 35, 609, DateTimeKind.Local).AddTicks(4132))
+                        .HasColumnName("created_time");
+
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime")
+                        .HasColumnName("deleted_time");
+
+                    b.Property<string>("From")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("from");
+
+                    b.Property<bool?>("IsBodyHtml")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_body_html")
+                        .HasComment("boolean value to describe if email contain html content");
+
+                    b.Property<DateTime?>("LastModifiedTime")
+                        .HasColumnType("datetime")
+                        .HasColumnName("modified_time");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("subject");
+
+                    b.HasKey("Id")
+                        .HasName("PRIMARY");
+
+                    b.ToTable("mail_outbox", (string)null);
+                });
+
             modelBuilder.Entity("Shared.Entities.Roles.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -378,7 +483,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5844))
+                        .HasDefaultValue(new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(7145))
                         .HasColumnName("created_time");
 
                     b.Property<Guid?>("DeletedByUserForeignKey")
@@ -419,13 +524,13 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         new
                         {
                             Id = new Guid("c3f357ff-1c85-4e3c-b6b2-21ef4afba71f"),
-                            CreatedTime = new DateTime(2023, 12, 28, 3, 21, 47, 366, DateTimeKind.Local).AddTicks(4034),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 569, DateTimeKind.Local).AddTicks(1985),
                             Name = "Admin"
                         },
                         new
                         {
                             Id = new Guid("c92db414-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 28, 3, 21, 47, 366, DateTimeKind.Local).AddTicks(4052),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 569, DateTimeKind.Local).AddTicks(2007),
                             Name = "User"
                         });
                 });
@@ -445,7 +550,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 28, 3, 21, 47, 396, DateTimeKind.Local).AddTicks(1107))
+                        .HasDefaultValue(new DateTime(2023, 12, 28, 13, 43, 35, 604, DateTimeKind.Local).AddTicks(7699))
                         .HasColumnName("created_time");
 
                     b.Property<DateTime?>("DeletedTime")
@@ -497,7 +602,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 28, 3, 21, 47, 350, DateTimeKind.Local).AddTicks(7417))
+                        .HasDefaultValue(new DateTime(2023, 12, 28, 13, 43, 35, 550, DateTimeKind.Local).AddTicks(5608))
                         .HasColumnName("created_time");
 
                     b.Property<Guid?>("DeletedByUserForeignKey")
@@ -511,7 +616,8 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("email");
 
                     b.Property<Guid?>("LastModifiedByUserForeignKey")
@@ -559,7 +665,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         new
                         {
                             Id = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5030),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6287),
                             Email = "root@localhost",
                             Name = "Root",
                             Password = "abcd1234",
@@ -567,110 +673,110 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9701e0cd-2f02-4243-80eb-3b3a3efe112a"),
+                            Id = new Guid("107e45cd-95ab-436b-8f03-a37759129aca"),
                             CreatedByUserForeignKey = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5106),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6365),
                             Email = "test0@localhost",
-                            LastModifiedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5107),
+                            LastModifiedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6367),
                             Name = "Test0",
                             Password = "abcd1234",
                             UserTypeForeignKey = new Guid("c3f257ff-1c85-4e3c-b6b2-21ef4afba71f")
                         },
                         new
                         {
-                            Id = new Guid("51af126a-11db-477c-8a14-1cadc993b14f"),
+                            Id = new Guid("db5d7f2e-32d4-496b-bb18-bdd3ef596d22"),
                             CreatedByUserForeignKey = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5113),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6371),
                             Email = "test1@localhost",
-                            LastModifiedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5114),
+                            LastModifiedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6373),
                             Name = "Test1",
                             Password = "abcd1234",
                             UserTypeForeignKey = new Guid("c3f257ff-1c85-4e3c-b6b2-21ef4afba71f")
                         },
                         new
                         {
-                            Id = new Guid("5615b431-5375-473c-8d42-0dd8647ddc7e"),
+                            Id = new Guid("8b8ca8c6-770b-4c67-98e3-fd7ccdca6e05"),
                             CreatedByUserForeignKey = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5117),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6376),
                             Email = "test2@localhost",
-                            LastModifiedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5119),
+                            LastModifiedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6377),
                             Name = "Test2",
                             Password = "abcd1234",
                             UserTypeForeignKey = new Guid("c3f257ff-1c85-4e3c-b6b2-21ef4afba71f")
                         },
                         new
                         {
-                            Id = new Guid("324d73e9-016f-4b7d-9db8-8c9173dd721e"),
+                            Id = new Guid("8bf685a5-ba34-41eb-923e-74cf9a293a02"),
                             CreatedByUserForeignKey = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5122),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6380),
                             Email = "test3@localhost",
-                            LastModifiedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5123),
+                            LastModifiedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6381),
                             Name = "Test3",
                             Password = "abcd1234",
                             UserTypeForeignKey = new Guid("c3f257ff-1c85-4e3c-b6b2-21ef4afba71f")
                         },
                         new
                         {
-                            Id = new Guid("e4f2cb6d-29db-45b2-8df2-c46147e1ab27"),
+                            Id = new Guid("ca3c9577-fe90-40d5-92f4-abe14aa1f6ef"),
                             CreatedByUserForeignKey = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5126),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6384),
                             Email = "test4@localhost",
-                            LastModifiedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5127),
+                            LastModifiedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6386),
                             Name = "Test4",
                             Password = "abcd1234",
                             UserTypeForeignKey = new Guid("c3f257ff-1c85-4e3c-b6b2-21ef4afba71f")
                         },
                         new
                         {
-                            Id = new Guid("fd8bbd38-9b82-4c9c-851f-8b43cf488b10"),
+                            Id = new Guid("5fa9980f-cb1c-40fd-9649-9a907586ff1b"),
                             CreatedByUserForeignKey = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5157),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6398),
                             Email = "test5@localhost",
-                            LastModifiedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5158),
+                            LastModifiedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6399),
                             Name = "Test5",
                             Password = "abcd1234",
                             UserTypeForeignKey = new Guid("c3f257ff-1c85-4e3c-b6b2-21ef4afba71f")
                         },
                         new
                         {
-                            Id = new Guid("20f3f65d-3df8-435c-b161-1ac3119d68f7"),
+                            Id = new Guid("a4587341-1e1f-4e73-b23f-26101c361fff"),
                             CreatedByUserForeignKey = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5174),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6402),
                             Email = "test6@localhost",
-                            LastModifiedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5175),
+                            LastModifiedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6404),
                             Name = "Test6",
                             Password = "abcd1234",
                             UserTypeForeignKey = new Guid("c3f257ff-1c85-4e3c-b6b2-21ef4afba71f")
                         },
                         new
                         {
-                            Id = new Guid("316021a7-e10f-4dc1-990a-ae8a06215463"),
+                            Id = new Guid("cbab4fda-aa35-4c3e-aac3-8795b93f1356"),
                             CreatedByUserForeignKey = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5179),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6432),
                             Email = "test7@localhost",
-                            LastModifiedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5180),
+                            LastModifiedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6434),
                             Name = "Test7",
                             Password = "abcd1234",
                             UserTypeForeignKey = new Guid("c3f257ff-1c85-4e3c-b6b2-21ef4afba71f")
                         },
                         new
                         {
-                            Id = new Guid("7d9ecc20-41be-4cf4-9954-98326f027320"),
+                            Id = new Guid("8fabe214-70b1-4e50-88e1-f2a942e450a0"),
                             CreatedByUserForeignKey = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5183),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6437),
                             Email = "test8@localhost",
-                            LastModifiedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5184),
+                            LastModifiedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6438),
                             Name = "Test8",
                             Password = "abcd1234",
                             UserTypeForeignKey = new Guid("c3f257ff-1c85-4e3c-b6b2-21ef4afba71f")
                         },
                         new
                         {
-                            Id = new Guid("bbd927a6-e400-4643-b604-d422322aee20"),
+                            Id = new Guid("f7c9a917-8f84-4629-9379-5e1551bafb16"),
                             CreatedByUserForeignKey = new Guid("c92db313-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5187),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6442),
                             Email = "test9@localhost",
-                            LastModifiedTime = new DateTime(2023, 12, 28, 3, 21, 47, 360, DateTimeKind.Local).AddTicks(5188),
+                            LastModifiedTime = new DateTime(2023, 12, 28, 13, 43, 35, 562, DateTimeKind.Local).AddTicks(6443),
                             Name = "Test9",
                             Password = "abcd1234",
                             UserTypeForeignKey = new Guid("c3f257ff-1c85-4e3c-b6b2-21ef4afba71f")
@@ -692,7 +798,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 28, 3, 21, 47, 347, DateTimeKind.Local).AddTicks(5303))
+                        .HasDefaultValue(new DateTime(2023, 12, 28, 13, 43, 35, 547, DateTimeKind.Local).AddTicks(2453))
                         .HasColumnName("created_time");
 
                     b.Property<DateTime?>("DeletedTime")
@@ -737,7 +843,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 28, 3, 21, 47, 344, DateTimeKind.Local).AddTicks(1813))
+                        .HasDefaultValue(new DateTime(2023, 12, 28, 13, 43, 35, 543, DateTimeKind.Local).AddTicks(7412))
                         .HasColumnName("created_time");
 
                     b.Property<DateTime?>("DeletedTime")
@@ -769,15 +875,30 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("uuid");
 
+                    b.Property<Guid?>("CreatedByUserForeignKey")
+                        .HasMaxLength(36)
+                        .HasColumnType("char(36)")
+                        .HasColumnName("created_by_uuid");
+
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 28, 3, 21, 47, 366, DateTimeKind.Local).AddTicks(8439))
+                        .HasDefaultValue(new DateTime(2023, 12, 28, 13, 43, 35, 569, DateTimeKind.Local).AddTicks(7456))
                         .HasColumnName("created_time");
+
+                    b.Property<Guid?>("DeletedByUserForeignKey")
+                        .HasMaxLength(36)
+                        .HasColumnType("char(36)")
+                        .HasColumnName("deleted_by_uuid");
 
                     b.Property<DateTime?>("DeletedTime")
                         .HasColumnType("datetime")
                         .HasColumnName("deleted_time");
+
+                    b.Property<Guid?>("LastModifiedByUserForeignKey")
+                        .HasMaxLength(36)
+                        .HasColumnType("char(36)")
+                        .HasColumnName("modified_by_uuid");
 
                     b.Property<DateTime?>("LastModifiedTime")
                         .HasColumnType("datetime")
@@ -795,8 +916,19 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("user_id");
 
+                    b.Property<Guid>("UsersId")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id")
                         .HasName("PRIMARY");
+
+                    b.HasIndex("CreatedByUserForeignKey");
+
+                    b.HasIndex("DeletedByUserForeignKey");
+
+                    b.HasIndex("LastModifiedByUserForeignKey");
+
+                    b.HasIndex("UsersId");
 
                     b.HasIndex(new[] { "RoleForeignKey" }, "IDX_FK_USERHASRELATIONTOROLE_ROLEFOREIGNKEY_ROLE");
 
@@ -820,7 +952,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2023, 12, 28, 3, 21, 47, 337, DateTimeKind.Local).AddTicks(3812))
+                        .HasDefaultValue(new DateTime(2023, 12, 28, 13, 43, 35, 536, DateTimeKind.Local).AddTicks(3094))
                         .HasColumnName("created_time");
 
                     b.Property<Guid?>("DeletedByUserForeignKey")
@@ -862,13 +994,13 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         new
                         {
                             Id = new Guid("c92db314-765b-46dd-bf40-ef7d5a5abd7b"),
-                            CreatedTime = new DateTime(2023, 12, 28, 3, 21, 47, 343, DateTimeKind.Local).AddTicks(8799),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 543, DateTimeKind.Local).AddTicks(4419),
                             Name = "User"
                         },
                         new
                         {
                             Id = new Guid("c3f257ff-1c85-4e3c-b6b2-21ef4afba71f"),
-                            CreatedTime = new DateTime(2023, 12, 28, 3, 21, 47, 343, DateTimeKind.Local).AddTicks(8827),
+                            CreatedTime = new DateTime(2023, 12, 28, 13, 43, 35, 543, DateTimeKind.Local).AddTicks(4453),
                             Name = "Root"
                         });
                 });
@@ -1159,6 +1291,24 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
 
             modelBuilder.Entity("Shared.Entities.Users.UserHasRelationToRole", b =>
                 {
+                    b.HasOne("Shared.Entities.Users.EUser", "CreatedByUser")
+                        .WithMany("CreatedUserHasRelationToRoles")
+                        .HasForeignKey("CreatedByUserForeignKey")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasConstraintName("FK_USERHASRELATIONTOROLE_CREATEDBYUSERFOREIGNKEY_TO_EUSER");
+
+                    b.HasOne("Shared.Entities.Users.EUser", "DeletedByUser")
+                        .WithMany("DeletedUserHasRelationToRoles")
+                        .HasForeignKey("DeletedByUserForeignKey")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasConstraintName("FK_USERHASRELATIONTOROLE_DELETEDBYUSERFOREIGNKEY_TO_EUSER");
+
+                    b.HasOne("Shared.Entities.Users.EUser", "LastModifiedByUser")
+                        .WithMany("ModifiedUserHasRelationToRoles")
+                        .HasForeignKey("LastModifiedByUserForeignKey")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasConstraintName("FK_USERHASRELATIONTOROLE_LASTMODIFIEDBYUSERFOREIGNKEY_TO_EUSER");
+
                     b.HasOne("Shared.Entities.Roles.Role", "Role")
                         .WithMany("UserHasRelationToRoles")
                         .HasForeignKey("RoleForeignKey")
@@ -1172,6 +1322,18 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_USERHASRELATIONTOROLE_USERFOREIGNKEY_TO_EUSER");
+
+                    b.HasOne("Shared.Entities.Users.EUser", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreatedByUser");
+
+                    b.Navigation("DeletedByUser");
+
+                    b.Navigation("LastModifiedByUser");
 
                     b.Navigation("Role");
 
@@ -1244,6 +1406,8 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
 
                     b.Navigation("CreatedRoles");
 
+                    b.Navigation("CreatedUserHasRelationToRoles");
+
                     b.Navigation("CreatedUserTypes");
 
                     b.Navigation("DeletedChatRelationToUsers");
@@ -1255,6 +1419,8 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Navigation("DeletedMessages");
 
                     b.Navigation("DeletedRoles");
+
+                    b.Navigation("DeletedUserHasRelationToRoles");
 
                     b.Navigation("DeletedUserTypes");
 
@@ -1275,6 +1441,8 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Migrations
                     b.Navigation("ModifiedMessages");
 
                     b.Navigation("ModifiedRoles");
+
+                    b.Navigation("ModifiedUserHasRelationToRoles");
 
                     b.Navigation("ModifiedUserTypes");
 

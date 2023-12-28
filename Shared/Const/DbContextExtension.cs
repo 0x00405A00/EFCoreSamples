@@ -46,6 +46,8 @@ namespace Shared.Const
             public const int MimeTypes = 50;
             public const int PathDescriptors = 1024;
             public const int Base64 = 4096;
+            public const int EmailSubject = 255;
+            public const int EmailAddrLength = 255;
         }
 
         public static Func<Type, string> GetTableName = new Func<Type, string>((type) =>

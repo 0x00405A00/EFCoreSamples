@@ -4,7 +4,7 @@ using Shared.ValueObjects.Ids;
 
 namespace Shared.Entities.Users
 {
-    public sealed partial class UserHasRelationToRole : Entity<UserHasRelationToRoleId>
+    public sealed partial class UserHasRelationToRole : AuditableEntity<UserHasRelationToRoleId>
     {
         public UserId UserForeignKey { get; private set; }
         public RoleId RoleForeignKey { get; private set; }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "RD/uayB4w2YmwKsu9K6mDG07wHk6v77Oo4xeZIiVZ5W0WTU4rweq9aNwpqFLPY4sWB8YFVad4If3pUpiXW8RUg==",
+  "dgSpecHash": "YyfoVXIhhxpV05Y5Gvk77HGljJyNwVe7by8yFBVsvWGNPSrfBSic+5d0rUUYeVQdds90FN6vvPaUJF5pzELsug==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mika\\source\\repos\\EFCoreSamples\\EFCoreMigrationTestWithInheritence_MySql\\EFCoreMigrationTestWithInheritence_MySql.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,8 @@
     "C:\\Users\\Mika\\.nuget\\packages\\k4os.compression.lz4\\1.3.5\\k4os.compression.lz4.1.3.5.nupkg.sha512",
     "C:\\Users\\Mika\\.nuget\\packages\\k4os.compression.lz4.streams\\1.3.5\\k4os.compression.lz4.streams.1.3.5.nupkg.sha512",
     "C:\\Users\\Mika\\.nuget\\packages\\k4os.hash.xxhash\\1.0.8\\k4os.hash.xxhash.1.0.8.nupkg.sha512",
+    "C:\\Users\\Mika\\.nuget\\packages\\mediatr\\12.2.0\\mediatr.12.2.0.nupkg.sha512",
+    "C:\\Users\\Mika\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\Mika\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.0\\microsoft.aspnetcore.cryptography.internal.8.0.0.nupkg.sha512",
     "C:\\Users\\Mika\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.0\\microsoft.aspnetcore.cryptography.keyderivation.8.0.0.nupkg.sha512",
     "C:\\Users\\Mika\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\8.0.0\\microsoft.aspnetcore.identity.ui.8.0.0.nupkg.sha512",

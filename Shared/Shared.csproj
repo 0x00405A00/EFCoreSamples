@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\Auths\Event\" />
+    <Folder Include="Entities\Auths\Exception\" />
+    <Folder Include="Entities\Mail\Events\" />
+    <Folder Include="Entities\Roles\Exceptions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
 </Project>

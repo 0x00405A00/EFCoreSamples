@@ -23,13 +23,14 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
             
             builder.Property(ut => ut.Email)
                 .IsRequired()
+                .HasMaxLength (DbContextExtension.ColumnLength.EmailAddrLength)
                 .HasColumnName("email");
 
             builder.Property(ut => ut.UserTypeForeignKey)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
                 .HasDefaultValue(new UserTypeId(Shared.Const.UserConst.UserType.User))
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserTypeId(fromDb))
+                .HasConversion(toDb => toDb.Id, fromDb => new UserTypeId(fromDb))
                 .HasColumnName("user_type_id");
 
             builder.Property(ut => ut.Password)

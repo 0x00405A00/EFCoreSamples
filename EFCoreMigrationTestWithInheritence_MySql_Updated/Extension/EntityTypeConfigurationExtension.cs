@@ -35,7 +35,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Extension
             builder.Property(ut => ut.Id)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => (TEntityId)Activator.CreateInstance(typeof(TEntityId), new object[] { fromDb }))
+                .HasConversion(toDb => toDb.Id, fromDb => (TEntityId)Activator.CreateInstance(typeof(TEntityId), new object[] { fromDb }))
                 .HasColumnName(DbContextExtension.ColumnNameDefinitions.UuidName);
 
             return builder;

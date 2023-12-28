@@ -110,6 +110,10 @@ namespace Shared.Entities.Users
         public ICollection<UserHasRelationToFriend>? UserHasRelationToFriendsLeft { get; }
         public ICollection<UserHasRelationToFriend>? UserHasRelationToFriendsRight { get; }
 
+        public ICollection<UserHasRelationToRole>? CreatedUserHasRelationToRoles { get; }
+        public ICollection<UserHasRelationToRole>? ModifiedUserHasRelationToRoles { get; }
+        public ICollection<UserHasRelationToRole>? DeletedUserHasRelationToRoles { get; }
+
         public ICollection<FriendshipRequest>? FriendshipRequestsWhereIamRequester { get; }
         public ICollection<FriendshipRequest>? FriendshipRequestsWhereIamTarget { get; }
 

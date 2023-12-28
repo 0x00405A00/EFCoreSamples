@@ -13,6 +13,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
         public void Configure(EntityTypeBuilder<UserHasRelationToRole> builder)
         {
             builder.AddDefaultProperties<UserHasRelationToRole, UserHasRelationToRoleId>();
+            builder.AddAuditableProperties<UserHasRelationToRole, UserHasRelationToRoleId>();
 
             var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.UserForeignKey), nameof(EUser));
             builder.HasIndex(e => e.UserForeignKey, fk1Index);
@@ -30,6 +31,8 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
                 .HasColumnName("user_id");
+
+            builder.AddAuditableConstraints<UserHasRelationToRole, UserHasRelationToRoleId>();
         }
     }
 }
