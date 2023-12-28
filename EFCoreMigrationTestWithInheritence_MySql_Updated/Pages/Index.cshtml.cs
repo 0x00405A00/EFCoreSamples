@@ -32,13 +32,38 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Pages
 
             var DbSet = dbContext.Set<EUser>();
             //Synchron Tests
-            var testUserSelect = DbSet
+            var rootUserSelect = DbSet
                 .Include(x => x.UserHasRelationToRoles)
                 .ThenInclude(y => y.Role)
                 .Include(x=>x.CreatedByUser)
                 .Include(x => x.UserType)
+                .Include(x => x.UserHasRelationToFriendsLeft)
+                .ThenInclude(x=>x.UserFriend)
+                .Include(x => x.UserHasRelationToFriendsRight)
+                .ThenInclude(x => x.User)
+                .Include(x => x.FriendshipRequestsWhereIamRequester)
+                .ThenInclude(x => x.TargetUser)
+                .Include(x => x.FriendshipRequestsWhereIamTarget)
+                .ThenInclude(x => x.RequesterUser)
                 .AsNoTracking()
                 .Where(x => x.Name == "Root")
+                .AsSingleQuery()
+                .ToList();
+            var testUserSelect = DbSet
+                .Include(x => x.UserHasRelationToRoles)
+                .ThenInclude(y => y.Role)
+                .Include(x => x.CreatedByUser)
+                .Include(x => x.UserType)
+                .Include(x => x.UserHasRelationToFriendsLeft)
+                .ThenInclude(x => x.UserFriend)
+                .Include(x => x.UserHasRelationToFriendsRight)
+                .ThenInclude(x => x.User)
+                .Include(x => x.FriendshipRequestsWhereIamRequester)
+                .ThenInclude(x => x.TargetUser)
+                .Include(x => x.FriendshipRequestsWhereIamTarget)
+                .ThenInclude(x => x.RequesterUser)
+                .AsNoTracking()
+                .Where(x => x.Name == "Test1")
                 .AsSingleQuery()
                 .ToList();
 

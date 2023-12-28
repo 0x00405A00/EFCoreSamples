@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shared.Const;
+using Shared.Entities.Users;
 using Shared.Primitives;
 using Shared.ValueObjects.Ids;
+using System.Reflection;
 
 namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Extension
 {
@@ -58,6 +60,58 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Extension
                 .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
                 .IsRequired(false)
                 .HasColumnName(DbContextExtension.ColumnNameDefinitions.UserSpecific.DeletedByUser);
+            return builder;
+        }
+
+        public static EntityTypeBuilder<TEntity> AddAuditableConstraints<TEntity, TEntityId>(this EntityTypeBuilder<TEntity> builder)
+            where TEntity : AuditableEntity<TEntityId>
+            where TEntityId : Identification
+        {
+            var clrTypeName = typeof(TEntity).Name; 
+            var createByUserForeignPropertyName = $"Created{clrTypeName}s";
+            var modifiedByUserForeignPropertyName = $"Modified{clrTypeName}s";
+            var deletedByUserForeignPropertyName = $"Deleted{clrTypeName}s";
+
+            var nameCollection = new string[3] { createByUserForeignPropertyName, modifiedByUserForeignPropertyName, deletedByUserForeignPropertyName };
+
+            var props = typeof(EUser).GetProperties()
+                .ToList()
+                .FindAll(prop=> nameCollection.Contains(prop.Name) &&prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericArguments()[0] == typeof(TEntity));
+            /*string tmp = null;
+            foreach ( var prop in props )
+            {
+                var tDef = prop.PropertyType.GetGenericTypeDefinition();
+                tmp += $"[{prop.Name}:{tDef.Name}|{tDef == typeof(ICollection<>)}],";
+            }*/
+            if (!props.Any() || props.Count != nameCollection.Count())
+            {
+                throw new InvalidOperationException($"cant find any of these foreign-properties '{createByUserForeignPropertyName},{modifiedByUserForeignPropertyName},{deletedByUserForeignPropertyName}' in entity {nameof(EUser)}");
+            }
+
+            var createdByUserConstraintName = DbContextExtension.GetForeignKeyName(typeof(TEntity).Name, nameof(AuditableEntity<TEntityId>.CreatedByUserForeignKey), nameof(EUser));
+            builder.HasOne(u => u.CreatedByUser)
+                .WithMany(createByUserForeignPropertyName)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(fk => fk.CreatedByUserForeignKey)
+                .HasConstraintName(createdByUserConstraintName);
+
+            var modifiedByUserConstraintName = DbContextExtension.GetForeignKeyName(typeof(TEntity).Name, nameof(AuditableEntity<TEntityId>.LastModifiedByUserForeignKey), nameof(EUser));
+            builder.HasOne(u => u.LastModifiedByUser)
+                .WithMany(modifiedByUserForeignPropertyName)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(fk => fk.LastModifiedByUserForeignKey)
+                .HasConstraintName(modifiedByUserConstraintName);
+
+            var deletedByUserConstraintName = DbContextExtension.GetForeignKeyName(typeof(TEntity).Name, nameof(AuditableEntity<TEntityId>.DeletedByUserForeignKey), nameof(EUser));
+            builder.HasOne(u => u.DeletedByUser)
+                .WithMany(deletedByUserForeignPropertyName)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(fk => fk.DeletedByUserForeignKey)
+                .HasConstraintName(deletedByUserConstraintName);
+
             return builder;
         }
     }

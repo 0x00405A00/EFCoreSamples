@@ -40,7 +40,12 @@ namespace Shared.Const
         {
             public const int Ids = 36;
             public const int Names = 64;
+            public const int PasswordLength = 32;
             public const int Descriptions = 255;
+            public const int FileExtension = 5;
+            public const int MimeTypes = 50;
+            public const int PathDescriptors = 1024;
+            public const int Base64 = 4096;
         }
 
         public static Func<Type, string> GetTableName = new Func<Type, string>((type) =>
@@ -92,6 +97,28 @@ namespace Shared.Const
                 null,
                 null);
             return rootUser;
+        }
+        public static List<EUser> GetTestSet()
+        {
+            List<EUser> testSet = new List<EUser>();
+            for(int i = 0;i<10;i++)
+            {
+                var var1 = EUser.Create(
+                    new UserId(Guid.NewGuid()),
+                    $"Test{i}",
+                    $"test{i}@localhost",
+                    "abcd1234",
+                    new UserTypeId(UserConst.UserType.Root),
+                    new CustomDateTime(DateTime.Now),
+                    new UserId(UserConst.RootUserId),
+                    new CustomDateTime(DateTime.Now),
+                    null,
+                    null,
+                    null);
+
+                testSet.Add(var1);
+            }
+            return testSet;
         }
     }
 }

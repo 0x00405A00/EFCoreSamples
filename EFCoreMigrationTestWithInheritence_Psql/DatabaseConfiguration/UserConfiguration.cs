@@ -31,7 +31,7 @@ namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Names);
 
-            builder.Property(ut => ut.UserTypeId)
+            builder.Property(ut => ut.UserTypeForeignKey)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
                 .HasDefaultValue(new UserTypeIdent(Shared.Const.UserConst.UserType.User))
@@ -48,7 +48,7 @@ namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration
             var userToUserTypeFkName = DbContextExtension.GetForeignKeyName(nameof(EUser), nameof(EUser.Id), nameof(UserType));
             builder.HasOne(d => d.UserType)
                 .WithMany(p => p.Users)
-                .HasForeignKey(d => d.UserTypeId)
+                .HasForeignKey(d => d.UserTypeForeignKey)
                 .HasConstraintName(userToUserTypeFkName);
 
             builder.HasMany(u => u.Roles)

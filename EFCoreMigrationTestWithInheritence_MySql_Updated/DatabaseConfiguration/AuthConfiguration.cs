@@ -42,7 +42,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 
             builder.Property(ut => ut.Token)
                 .IsRequired()
-                .HasMaxLength(255)
+                .HasMaxLength(DbContextExtension.ColumnLength.Base64)
                 .HasColumnName("token");
 
             builder.Property(ut => ut.TokenExpiresIn)
@@ -52,12 +52,12 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 
             builder.Property(ut => ut.UserAgent)
                 .IsRequired()
-                .HasMaxLength(255)
+                .HasMaxLength(DbContextExtension.ColumnLength.Names)
                 .HasColumnName("browser_user_agent");
 
             builder.Property(ut => ut.RefreshToken)
                 .IsRequired()
-                .HasMaxLength(255)
+                .HasMaxLength(DbContextExtension.ColumnLength.Base64)
                 .HasColumnName("refresh_token");
 
             builder.Property(ut => ut.RefreshTokenExpiresIn)
@@ -69,8 +69,6 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .IsRequired(false)
                 .HasColumnType("datetime")
                 .HasColumnName("logout_time");
-
-
 
             string authConstraintName = DbContextExtension.GetForeignKeyName(nameof(Auth), nameof(Auth.UserId), nameof(EUser));
             builder.HasOne(u => u.User)

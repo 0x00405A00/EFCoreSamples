@@ -20,29 +20,8 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .HasMaxLength(DbContextExtension.ColumnLength.Names)
                 .HasColumnName(DbContextExtension.ColumnNameDefinitions.Name);
 
-            string createdByUserConstraintName =DbContextExtension.GetForeignKeyName(nameof(UserType),nameof(UserType.CreatedByUserForeignKey),nameof(EUser));
-            string modifiedByUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(UserType), nameof(UserType.LastModifiedByUserForeignKey), nameof(EUser));
-            string deletedByUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(UserType), nameof(UserType.DeletedByUserForeignKey), nameof(EUser));
-            builder.HasOne(u => u.CreatedByUser)
-                .WithMany(x => x.CreatedUserTypes)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.NoAction)
-                .HasForeignKey(x => x.CreatedByUserForeignKey)
-                .HasConstraintName(createdByUserConstraintName);
-            builder.HasOne(u => u.LastModifiedByUser)
-                .WithMany(x => x.ModifiedUserTypes)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.NoAction)
-                .HasForeignKey(x => x.LastModifiedByUserForeignKey)
-                .HasConstraintName(modifiedByUserConstraintName);
-            builder.HasOne(u => u.DeletedByUser)
-                .WithMany(x => x.DeletedUserTypes)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.NoAction)
-                .HasForeignKey(x => x.DeletedByUserForeignKey)
-                .HasConstraintName(deletedByUserConstraintName);
+            builder.AddAuditableConstraints<UserType, UserTypeId>();
 
-            var rootUser = DbContextExtension.GetRootUser();
             var userType1 = UserType.Create(
                 new UserTypeId(UserConst.UserType.User),
                 "User",
@@ -52,6 +31,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 null,
                 null,
                 null);
+
             var userType2 = UserType.Create(
                 new UserTypeId(UserConst.UserType.Root),
                 "Root",
@@ -61,6 +41,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 null,
                 null,
                 null);
+
             builder.HasData(userType1, userType2);
         }
     }

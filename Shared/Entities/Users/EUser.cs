@@ -1,4 +1,5 @@
 ﻿using Shared.Entities.Auths;
+using Shared.Entities.Chats;
 using Shared.Entities.Roles;
 using Shared.Primitives;
 using Shared.ValueObjects.Ids;
@@ -18,7 +19,7 @@ namespace Shared.Entities.Users
         public string Email { get; private set; }
         public string Password { get; private set; }
 
-        public UserTypeId UserTypeId { get; private set; }//<------- FK
+        public UserTypeId UserTypeForeignKey { get; private set; }//<------- FK
 
         private EUser() : base()
         {
@@ -41,7 +42,7 @@ namespace Shared.Entities.Users
             Name = name;
             Email = email;
             Password = password;
-            UserTypeId = userTypeId;
+            UserTypeForeignKey = userTypeId;
             CreatedTime = createdDateTime;
             CreatedByUserForeignKey = createdBy;
             LastModifiedTime = modifiedDateTime;
@@ -84,21 +85,50 @@ namespace Shared.Entities.Users
     /// </summary>
     public sealed partial class EUser
     {
-        public EUser? CreatedByUser { get; }
-        public EUser? LastModifiedByUser { get; }
-        public EUser? DeletedByUser { get; }
         public UserType UserType { get; set; }//<---- Navigation Property must have the accessors get; set;
+
         public ICollection<UserHasRelationToRole> UserHasRelationToRoles { get; }
+
+        public ICollection<ChatRelationToUser>? ChatRelationToUsers { get; }
+
+        public ICollection<Message>? Messages { get; }
+        public ICollection<Message>? CreatedMessages { get; }
+        public ICollection<Message>? ModifiedMessages { get; }
+        public ICollection<Message>? DeletedMessages { get; }
+
+        /// <summary>
+        /// Messages that are not received from user, when received (acknowledged) than the message should be removed from entity 'MessagesInOutbox'
+        /// </summary>
+        public ICollection<MessageOutbox>? MessagesInOutbox { get; }
+
+        public ICollection<ChatRelationToUser>? CreatedChatRelationToUsers { get; }
+        public ICollection<ChatRelationToUser>? ModifiedChatRelationToUsers { get; }
+        public ICollection<ChatRelationToUser>? DeletedChatRelationToUsers { get; }
+
         public ICollection<Role> Roles { get; }
+
+        public ICollection<UserHasRelationToFriend>? UserHasRelationToFriendsLeft { get; }
+        public ICollection<UserHasRelationToFriend>? UserHasRelationToFriendsRight { get; }
+
+        public ICollection<FriendshipRequest>? FriendshipRequestsWhereIamRequester { get; }
+        public ICollection<FriendshipRequest>? FriendshipRequestsWhereIamTarget { get; }
+
         public ICollection<UserType>? CreatedUserTypes { get; }
         public ICollection<UserType>? ModifiedUserTypes { get; }
         public ICollection<UserType>? DeletedUserTypes { get; }
+
         public ICollection<Role>? CreatedRoles { get; }
         public ICollection<Role>? ModifiedRoles { get; }
         public ICollection<Role>? DeletedRoles { get; }
-        public ICollection<Auth>? Auths { get; }
 
-        //public ICollection<UserFriend> UserFriends { get; } = new List<UserFriend>();
-        //public ICollection<FriendshipRequest> FriendshipRequests { get; } = new List<FriendshipRequest>();
+        public ICollection<Chat>? CreatedChats { get; }
+        public ICollection<Chat>? ModifiedChats { get; }
+        public ICollection<Chat>? DeletedChats { get; }
+
+        public ICollection<EUser>? CreatedEUsers { get; }
+        public ICollection<EUser>? ModifiedEUsers { get; }
+        public ICollection<EUser>? DeletedEUsers { get; }
+
+        public ICollection<Auth>? Auths { get; }
     }
 }

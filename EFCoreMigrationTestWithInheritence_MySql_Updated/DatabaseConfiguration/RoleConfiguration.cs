@@ -20,29 +20,8 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .IsRequired()
                 .HasColumnName(DbContextExtension.ColumnNameDefinitions.Name);
 
-            string createdByUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(Role), nameof(Role.CreatedByUserForeignKey), nameof(EUser));
-            string modifiedByUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(Role), nameof(Role.LastModifiedByUserForeignKey), nameof(EUser));
-            string deletedByUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(Role), nameof(Role.DeletedByUserForeignKey), nameof(EUser));
-            builder.HasOne(u => u.CreatedByUser)
-                .WithMany(x => x.CreatedRoles)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.NoAction)
-                .HasForeignKey(x => x.CreatedByUserForeignKey)
-                .HasConstraintName(createdByUserConstraintName);
-            builder.HasOne(u => u.LastModifiedByUser)
-                .WithMany(x => x.ModifiedRoles)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.NoAction)
-                .HasForeignKey(x => x.LastModifiedByUserForeignKey)
-                .HasConstraintName(modifiedByUserConstraintName);
-            builder.HasOne(u => u.DeletedByUser)
-                .WithMany(x => x.DeletedRoles)
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.NoAction)
-                .HasForeignKey(x => x.DeletedByUserForeignKey)
-                .HasConstraintName(deletedByUserConstraintName);
+            builder.AddAuditableConstraints<Role, RoleId>();
 
-            var rootUser = DbContextExtension.GetRootUser();
             var roleAdmin = Role.Create(
                 new RoleId(UserConst.Role.Admin),
                 "Admin",

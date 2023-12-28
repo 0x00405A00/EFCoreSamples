@@ -32,42 +32,6 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
                 .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
                 .HasColumnName("user_id");
-
-            builder.HasOne(d => d.Role).WithMany(p => p.UserHasRelationToRoles)
-                .HasForeignKey(d => d.RoleForeignKey)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("fk_userRoleToRole");
-
-            /*builder.HasOne(d => d.User).WithMany(p => p.UserHasRelationToRoles)
-                .HasForeignKey(d => d.UserForeignKey)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("fk_userRoleToUser");*/
-        }
-    }
-    internal class UserFriendsConfiguration : IEntityTypeConfiguration<UserFriend>
-    {
-        public void Configure(EntityTypeBuilder<UserFriend> builder)
-        {
-            builder.AddDefaultProperties<UserFriend, UserFriendId>();
-
-            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserFriend), nameof(UserFriend.UserForeignKey), nameof(EUser));
-            builder.HasIndex(e => e.UserForeignKey, fk1Index);
-
-            var fk2Index = DbContextExtension.GetIndexForFkName(nameof(UserFriend), nameof(UserFriend.FriendForeignKey), nameof(EUser));
-            builder.HasIndex(e => e.FriendForeignKey, fk2Index);
-
-            builder.Property(ut => ut.FriendForeignKey)
-                .IsRequired()
-                .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
-                .HasColumnName("friend_id");
-
-            builder.Property(ut => ut.UserForeignKey)
-                .IsRequired()
-                .HasMaxLength(DbContextExtension.ColumnLength.Ids)
-                .HasConversion(toDb => toDb.Uuid, fromDb => new UserId(fromDb))
-                .HasColumnName("user_id");
-
         }
     }
 }

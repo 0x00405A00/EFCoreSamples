@@ -2,9 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shared.Const;
-using Shared.Entities.Auths;
+using Shared.Entities.Roles;
 using Shared.Entities.Users;
 using Shared.ValueObjects.Ids;
+using System.Security.Cryptography.Xml;
 
 namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 {
@@ -24,7 +25,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .IsRequired()
                 .HasColumnName("email");
 
-            builder.Property(ut => ut.UserTypeId)
+            builder.Property(ut => ut.UserTypeForeignKey)
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
                 .HasDefaultValue(new UserTypeId(Shared.Const.UserConst.UserType.User))
@@ -33,10 +34,11 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 
             builder.Property(ut => ut.Password)
                 .IsRequired()
-                .HasMaxLength(DbContextExtension.ColumnLength.Names)
+                .HasMaxLength(DbContextExtension.ColumnLength.PasswordLength)
                 .HasColumnName("password");
 
-            builder.HasOne(u => u.CreatedByUser)
+            //alte Constraints-Erstellung vor builder.AddAuditableConstraints<EUser, UserId>(); Implementierung
+            /*builder.HasOne(u => u.CreatedByUser)
                 .WithMany()
                 .IsRequired(false)
                 .HasForeignKey(fk => fk.CreatedByUserForeignKey);
@@ -49,36 +51,33 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
             builder.HasOne(u => u.DeletedByUser)
                 .WithMany()
                 .IsRequired(false)
-                .HasForeignKey(fk => fk.DeletedByUserForeignKey);
+                .HasForeignKey(fk => fk.DeletedByUserForeignKey);*/
 
+            var userToUserTypeConstraintName = DbContextExtension.GetForeignKeyName(nameof(EUser),nameof(EUser.UserTypeForeignKey),nameof(UserType));
+            builder.HasOne(x=>x.UserType)
+                .WithMany(x=>x.Users)
+                .HasForeignKey(x=>x.UserTypeForeignKey)
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired()
+                .HasConstraintName(userToUserTypeConstraintName);
 
+            builder.AddAuditableConstraints<EUser, UserId>();
+
+            string userHasRoleToUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.UserForeignKey), nameof(EUser));
+            string userHasRoleToRoleConstraintName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.RoleForeignKey), nameof(Role));
             builder.HasMany(u => u.Roles)
                 .WithMany(r => r.Users)
                 .UsingEntity<UserHasRelationToRole>(
                 j =>
                 {
-                    j.HasOne<EUser>(e => e.User).WithMany(e => e.UserHasRelationToRoles).HasForeignKey(e => e.UserForeignKey);
-                    j.HasOne(t => t.Role).WithMany(e => e.UserHasRelationToRoles).HasForeignKey(e => e.RoleForeignKey);
+                    j.HasOne(e => e.User).WithMany(e => e.UserHasRelationToRoles).HasForeignKey(e => e.UserForeignKey).HasConstraintName(userHasRoleToUserConstraintName);
+                    j.HasOne(t => t.Role).WithMany(e => e.UserHasRelationToRoles).HasForeignKey(e => e.RoleForeignKey).HasConstraintName(userHasRoleToRoleConstraintName);
                 });
 
-            /*builder.HasMany(u => u.FriendshipRequests)
-                .WithMany(r => r.Users)
-                .UsingEntity<FriendshipRequest>(
-                j =>
-                {
-                    j.HasOne<User>(e => e.RequestUser).WithMany(e => e.FriendshipRequests).HasForeignKey(e => e.RequestUserForeignKey);
-                    j.HasOne(t => t.TargetUser).WithMany(e => e.FriendshipRequests).HasForeignKey(e => e.TargetUserForeignKey);
-                });
-            builder.HasMany(u => u.UserFriends)
-                .WithMany(r => r.Users)
-                .UsingEntity<UserFriend>(
-                j =>
-                {
-                    j.HasOne<User>(e => e.User).WithMany(e => e.UserFriends).HasForeignKey(e => e.UserForeignKey);
-                    j.HasOne(t => t.Friend).WithMany(e => e.UserFriends).HasForeignKey(e => e.FriendForeignKey);
-                });*/
-
-            builder.HasData(DbContextExtension.GetRootUser());
+            List<EUser> users = new List<EUser>();
+            users.Add(DbContextExtension.GetRootUser());
+            users.AddRange(DbContextExtension.GetTestSet());
+            builder.HasData(users);
         }
     }
 }

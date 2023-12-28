@@ -2,12 +2,13 @@
 using EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.Options;
 using Shared.EFCore;
 using Shared.Entities.Auths;
+using Shared.Entities.Chats;
 using Shared.Entities.Roles;
 using Shared.Entities.Users;
 using Shared.Primitives;
+using static EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration.ChatRelationToUserConfiguration;
 
 namespace EFCoreMigrationTestWithInheritence_MySql_Updated
 {
@@ -24,9 +25,15 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated
         #region DbSets
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserHasRelationToRole> UserHasRelationToRoles { get; set; }
+        public DbSet<FriendshipRequest> FriendshipRequests { get; set; }
+        public DbSet<UserHasRelationToFriend> UserFriends { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
         public DbSet<EUser> Users { get; set; }
         public DbSet<Auth> Auths { get; set; }
+        public DbSet<Chat> Chats { get; set; }
+        public DbSet<ChatRelationToUser> ChatRelationToUsers { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<MessageOutbox> MessageOutboxes { get; set; }
         #endregion
         #region Ctor
         /*public NewContext() : base()
@@ -68,11 +75,16 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated
             //Initial Migration: PS C:\Users\Mika\source\repos\jellyfish-backend-ddd\Presentation> dotnet ef migrations add InitialCreate --context ApplicationDbContext
             //Current Problem: A key cannot be configured on 'Entity<Identification>' because it is a derived type.The key must be configured on the root type 'Entity'.If you did not intend for 'Entity' to be included in the model, ensure that it is not referenced by a DbSet property on your context, referenced in a configuration call to ModelBuilder, or referenced from a navigation on a type that is included in the model.
             modelBuilder.ApplyConfiguration(new UserTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new UserHasRelationToFriendsConfiguration());
+            modelBuilder.ApplyConfiguration(new FriendshipRequestsConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new UserHasRelationToRoleConfiguration());
             modelBuilder.ApplyConfiguration(new AuthConfiguration());
-
+            modelBuilder.ApplyConfiguration(new ChatConfiguration());
+            modelBuilder.ApplyConfiguration(new ChatRelationToUserConfiguration());
+            modelBuilder.ApplyConfiguration(new MessageConfiguration());
+            modelBuilder.ApplyConfiguration(new MessageOutboxConfiguration());
 
             //modelBuilder.ApplyConfigurationsFromAssembly ignore any order so dependencies which are order depend could not be created (app runs in exception)
 
