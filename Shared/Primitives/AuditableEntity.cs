@@ -12,5 +12,21 @@ namespace Shared.Primitives
         public User? CreatedByUser { get; set; }
         public User? LastModifiedByUser { get; set; }
         public User? DeletedByUser { get; set; }
+
+        public void SetLastModified(User modifiedBy)
+        {
+            LastModifiedTime = new CustomDateTime(DateTime.Now);
+            LastModifiedByUser = modifiedBy;
+        }
+        public void SetCreated(User createdBy)
+        {
+            CreatedTime = new CustomDateTime(DateTime.Now);
+            CreatedByUser = createdBy;
+        }
+        public void SetDeleted(User deletedBy)
+        {
+            DeletedTime = new CustomDateTime(DateTime.Now);
+            DeletedByUser = deletedBy;
+        }
     }
 }

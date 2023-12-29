@@ -1,5 +1,5 @@
-﻿using EFCoreMigrationTestWithInheritence_MySql_Updated.Converter;
-using EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration;
+﻿using EFCoreMigrationTestWithInheritence_MySql_Updated.EFCore.Converter;
+using EFCoreMigrationTestWithInheritence_MySql_Updated.EFCore.DatabaseConfiguration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Shared.EFCore;
