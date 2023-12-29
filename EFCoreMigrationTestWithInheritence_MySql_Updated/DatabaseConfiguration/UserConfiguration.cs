@@ -9,12 +9,12 @@ using System.Security.Cryptography.Xml;
 
 namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 {
-    internal class UserConfiguration : IEntityTypeConfiguration<EUser>
+    internal class UserConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<EUser> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.AddDefaultProperties<EUser, UserId>();
-            builder.AddAuditableProperties<EUser, UserId>();
+            builder.AddDefaultProperties<User, UserId>();
+            builder.AddAuditableProperties<User, UserId>();
 
             builder.Property(ut => ut.Name)
                 .IsRequired()
@@ -54,7 +54,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .IsRequired(false)
                 .HasForeignKey(fk => fk.DeletedByUserForeignKey);*/
 
-            var userToUserTypeConstraintName = DbContextExtension.GetForeignKeyName(nameof(EUser),nameof(EUser.UserTypeForeignKey),nameof(UserType));
+            var userToUserTypeConstraintName = DbContextExtension.GetForeignKeyName(nameof(User),nameof(User.UserTypeForeignKey),nameof(UserType));
             builder.HasOne(x=>x.UserType)
                 .WithMany(x=>x.Users)
                 .HasForeignKey(x=>x.UserTypeForeignKey)
@@ -62,9 +62,9 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .IsRequired()
                 .HasConstraintName(userToUserTypeConstraintName);
 
-            builder.AddAuditableConstraints<EUser, UserId>();
+            builder.AddAuditableConstraints<User, UserId>();
 
-            string userHasRoleToUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.UserForeignKey), nameof(EUser));
+            string userHasRoleToUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.UserForeignKey), nameof(User));
             string userHasRoleToRoleConstraintName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.RoleForeignKey), nameof(Role));
             builder.HasMany(u => u.Roles)
                 .WithMany(r => r.Users)
@@ -75,7 +75,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                     j.HasOne(t => t.Role).WithMany(e => e.UserHasRelationToRoles).HasForeignKey(e => e.RoleForeignKey).HasConstraintName(userHasRoleToRoleConstraintName);
                 });
 
-            List<EUser> users = new List<EUser>();
+            List<User> users = new List<User>();
             users.Add(DbContextExtension.GetRootUser());
             users.AddRange(DbContextExtension.GetTestSet());
             builder.HasData(users);

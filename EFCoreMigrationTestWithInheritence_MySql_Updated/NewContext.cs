@@ -29,14 +29,16 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated
         public DbSet<FriendshipRequest> FriendshipRequests { get; set; }
         public DbSet<UserHasRelationToFriend> UserFriends { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
-        public DbSet<EUser> Users { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Auth> Auths { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<ChatRelationToUser> ChatRelationToUsers { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<MessageOutbox> MessageOutboxes { get; set; }
-        public DbSet<EmailType> EmailTypes { get; set; }
+        public DbSet<EmailSendingType> EmailTypes { get; set; }
         public DbSet<MailOutbox> MailOutboxes { get; set; }
+        public DbSet<MailOutboxRecipient> MailOutboxRecipients { get; set; }
+        public DbSet<MailOutboxAttachment> MailOutboxAttachments { get; set; }
         //public DbSet<ChatInviteRequest> ChatInviteRequests { get; set; }
         #endregion
         #region Ctor
@@ -97,8 +99,10 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated
             modelBuilder.ApplyConfiguration(new MessageConfiguration());
             modelBuilder.ApplyConfiguration(new MessageOutboxConfiguration());
             modelBuilder.ApplyConfiguration(new ChatInviteRequestConfiguration());
-            modelBuilder.ApplyConfiguration(new EmailTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new EmailSendingTypeConfiguration());
             modelBuilder.ApplyConfiguration(new MailOutboxConfiguration());
+            modelBuilder.ApplyConfiguration(new MailOutboxRecipientConfiguration());
+            modelBuilder.ApplyConfiguration(new MailOutboxAttachmentConfiguration());
 
             //modelBuilder.ApplyConfigurationsFromAssembly ignore any order so dependencies which are order depend could not be created (app runs in exception)
 

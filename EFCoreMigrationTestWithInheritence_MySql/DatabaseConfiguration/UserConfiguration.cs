@@ -5,15 +5,15 @@ using Shared.Entities.Users;
 
 namespace EFCoreMigrationTestWithInheritence.DatabaseConfiguration
 {
-    internal class UserConfiguration : IEntityTypeConfiguration<EUser>
+    internal class UserConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<EUser> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
-            string tableName = DbContextExtension.GetTableName(typeof(EUser));
+            string tableName = DbContextExtension.GetTableName(typeof(User));
             builder.ToTable(tableName);
             builder.HasKey(ut => ut.Id);
 
-            var keyIndex = DbContextExtension.GetIndexName(nameof(EUser.Id));
+            var keyIndex = DbContextExtension.GetIndexName(nameof(User.Id));
             builder.HasIndex(e => e.Id, keyIndex);
 
             builder.Property(ut => ut.Id)

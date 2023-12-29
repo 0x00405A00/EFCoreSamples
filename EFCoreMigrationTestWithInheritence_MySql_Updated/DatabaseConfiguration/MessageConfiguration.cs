@@ -46,7 +46,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .HasMaxLength(DbContextExtension.ColumnLength.MimeTypes)
                 .HasColumnName("binary_content_base64_mime_type");
 
-            string messageRelationToUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(Message), nameof(Message.UserForeignKey), nameof(EUser));
+            string messageRelationToUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(Message), nameof(Message.UserForeignKey), nameof(User));
             string messageRelationToChatConstraintName = DbContextExtension.GetForeignKeyName(nameof(Message), nameof(Message.ChatForeignKey), nameof(Chat));
             builder.HasOne(e => e.User)
                 .WithMany(x => x.Messages)

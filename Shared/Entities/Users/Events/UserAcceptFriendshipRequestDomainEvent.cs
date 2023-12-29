@@ -4,10 +4,10 @@ namespace Shared.Entities.Users.Events
 {
     public record UserAcceptFriendshipRequestDomainEvent : DomainEvent
     {
-        private EUser user;
+        private User user;
         private FriendshipRequest request;
 
-        public UserAcceptFriendshipRequestDomainEvent(EUser user, FriendshipRequest request) : base(user)
+        public UserAcceptFriendshipRequestDomainEvent(User user, FriendshipRequest request) : base(user)
         {
             this.user = user;
             this.request = request;

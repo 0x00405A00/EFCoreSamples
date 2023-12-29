@@ -14,7 +14,7 @@ namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration
             builder.ToTable(tableName);
             builder.HasKey(ut => new { ut.RoleForeignKey, ut.UserForeignKey });
 
-            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole),nameof(UserHasRelationToRole.Id),nameof(EUser));
+            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole),nameof(UserHasRelationToRole.Id),nameof(User));
             builder.HasIndex(e => e.UserForeignKey, fk1Index);
 
             var fk2Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.Id), nameof(Role));
@@ -39,7 +39,7 @@ namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration
                 .HasConversion(toDb => toDb.Id, fromDb => new UserIdent(fromDb))
                 .HasColumnName("user_id");
 
-            var userRelationToUserFkName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToRole),nameof(UserHasRelationToRole.UserForeignKey), nameof(EUser));
+            var userRelationToUserFkName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToRole),nameof(UserHasRelationToRole.UserForeignKey), nameof(User));
             builder.HasOne(d => d.User)
                 .WithMany(p => p.UserHasRelationToRoles)
                 .HasForeignKey(d => d.UserForeignKey)

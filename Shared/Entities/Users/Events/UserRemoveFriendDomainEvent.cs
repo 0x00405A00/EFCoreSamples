@@ -2,7 +2,7 @@
 
 namespace Shared.Entities.Users.Events
 {
-    public record UserRemoveFriendDomainEvent(EUser user, EUser newFriend) : DomainEvent(user)
+    public record UserRemoveFriendDomainEvent(User user, User newFriend) : DomainEvent(user)
     {
     }
 }

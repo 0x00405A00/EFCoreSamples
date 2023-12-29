@@ -2,7 +2,7 @@
 
 namespace Shared.Entities.Users.Events
 {
-    public record UserLoggedInDomainEvent(EUser e) : DomainEvent(e)
+    public record UserLoggedInDomainEvent(User e) : DomainEvent(e)
     {
     }
 }

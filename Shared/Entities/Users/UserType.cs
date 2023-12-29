@@ -6,7 +6,7 @@ namespace Shared.Entities.Users
     public sealed class UserType : AuditableEntity<UserTypeId>
     {
         public string Name { get; private set; }
-        public ICollection<EUser>? Users { get; }
+        public ICollection<User>? Users { get; }
         private UserType() : base()
         { 
         

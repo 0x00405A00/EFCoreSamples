@@ -2,7 +2,7 @@
 
 namespace Shared.Entities.Users.Events
 {
-    public record UserPasswordResetRequestDomainEvent(EUser e) : DomainEvent(e)
+    public record UserPasswordResetRequestDomainEvent(User e) : DomainEvent(e)
     {
 
     }

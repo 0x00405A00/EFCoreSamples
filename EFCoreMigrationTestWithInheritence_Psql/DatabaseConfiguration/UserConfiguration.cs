@@ -7,15 +7,15 @@ using System.Xml.Linq;
 
 namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration
 {
-    internal class UserConfiguration : IEntityTypeConfiguration<EUser>
+    internal class UserConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<EUser> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
-            string tableName = DbContextExtension.GetTableName(typeof(EUser));
+            string tableName = DbContextExtension.GetTableName(typeof(User));
             builder.ToTable(tableName);
             builder.HasKey(ut => ut.Id);
 
-            var keyIndex = DbContextExtension.GetIndexName(nameof(EUser.Id));
+            var keyIndex = DbContextExtension.GetIndexName(nameof(User.Id));
             builder.HasIndex(e => e.Id, keyIndex);
 
             builder.Property(ut => ut.Id)
@@ -45,7 +45,7 @@ namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration
                 .IsRequired()
                 .HasMaxLength(DbContextExtension.ColumnLength.Names);*/
 
-            var userToUserTypeFkName = DbContextExtension.GetForeignKeyName(nameof(EUser), nameof(EUser.Id), nameof(UserType));
+            var userToUserTypeFkName = DbContextExtension.GetForeignKeyName(nameof(User), nameof(User.Id), nameof(UserType));
             builder.HasOne(d => d.UserType)
                 .WithMany(p => p.Users)
                 .HasForeignKey(d => d.UserTypeForeignKey)
@@ -56,11 +56,11 @@ namespace EFCoreMigrationTestWithInheritence_Psql.DatabaseConfiguration
                 .UsingEntity<UserHasRelationToRole>(
                 j =>
                 {
-                    j.HasOne<EUser>(e=>e.User).WithMany(e=>e.UserHasRelationToRoles).HasForeignKey(e=>e.UserForeignKey);
+                    j.HasOne<User>(e=>e.User).WithMany(e=>e.UserHasRelationToRoles).HasForeignKey(e=>e.UserForeignKey);
                     j.HasOne(t=>t.Role).WithMany(e=>e.UserHasRelationToRoles).HasForeignKey(e => e.RoleForeignKey);
                 });
 
-            EUser rootUser = new User()
+            User rootUser = new User()
             {
                 Name = "Root",
                 Password = "abcd1234",

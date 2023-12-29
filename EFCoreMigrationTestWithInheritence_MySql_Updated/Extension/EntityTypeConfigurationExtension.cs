@@ -74,7 +74,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Extension
 
             var nameCollection = new string[3] { createByUserForeignPropertyName, modifiedByUserForeignPropertyName, deletedByUserForeignPropertyName };
 
-            var props = typeof(EUser).GetProperties()
+            var props = typeof(User).GetProperties()
                 .ToList()
                 .FindAll(prop=> nameCollection.Contains(prop.Name) &&prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericArguments()[0] == typeof(TEntity));
             /*string tmp = null;
@@ -85,10 +85,10 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Extension
             }*/
             if (!props.Any() || props.Count != nameCollection.Count())
             {
-                throw new InvalidOperationException($"cant find any of these foreign-properties '{createByUserForeignPropertyName},{modifiedByUserForeignPropertyName},{deletedByUserForeignPropertyName}' in entity {nameof(EUser)}");
+                throw new InvalidOperationException($"cant find any of these foreign-properties (prop-type should be '{nameof(ICollection<TEntity>)}') '{createByUserForeignPropertyName},{modifiedByUserForeignPropertyName},{deletedByUserForeignPropertyName}' in entity {nameof(User)}");
             }
 
-            var createdByUserConstraintName = DbContextExtension.GetForeignKeyName(typeof(TEntity).Name, nameof(AuditableEntity<TEntityId>.CreatedByUserForeignKey), nameof(EUser));
+            var createdByUserConstraintName = DbContextExtension.GetForeignKeyName(typeof(TEntity).Name, nameof(AuditableEntity<TEntityId>.CreatedByUserForeignKey), nameof(User));
             builder.HasOne(u => u.CreatedByUser)
                 .WithMany(createByUserForeignPropertyName)
                 .IsRequired(false)
@@ -96,7 +96,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Extension
                 .HasForeignKey(fk => fk.CreatedByUserForeignKey)
                 .HasConstraintName(createdByUserConstraintName);
 
-            var modifiedByUserConstraintName = DbContextExtension.GetForeignKeyName(typeof(TEntity).Name, nameof(AuditableEntity<TEntityId>.LastModifiedByUserForeignKey), nameof(EUser));
+            var modifiedByUserConstraintName = DbContextExtension.GetForeignKeyName(typeof(TEntity).Name, nameof(AuditableEntity<TEntityId>.LastModifiedByUserForeignKey), nameof(User));
             builder.HasOne(u => u.LastModifiedByUser)
                 .WithMany(modifiedByUserForeignPropertyName)
                 .IsRequired(false)
@@ -104,7 +104,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Extension
                 .HasForeignKey(fk => fk.LastModifiedByUserForeignKey)
                 .HasConstraintName(modifiedByUserConstraintName);
 
-            var deletedByUserConstraintName = DbContextExtension.GetForeignKeyName(typeof(TEntity).Name, nameof(AuditableEntity<TEntityId>.DeletedByUserForeignKey), nameof(EUser));
+            var deletedByUserConstraintName = DbContextExtension.GetForeignKeyName(typeof(TEntity).Name, nameof(AuditableEntity<TEntityId>.DeletedByUserForeignKey), nameof(User));
             builder.HasOne(u => u.DeletedByUser)
                 .WithMany(deletedByUserForeignPropertyName)
                 .IsRequired(false)

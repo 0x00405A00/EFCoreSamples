@@ -5,11 +5,11 @@ namespace Shared.Primitives
 {
     public interface IAuditableEntity
     {
-        EUser? CreatedByUser { get; set; }
+        User? CreatedByUser { get; set; }
         UserId? CreatedByUserForeignKey { get; set; }
-        EUser? DeletedByUser { get; set; }
+        User? DeletedByUser { get; set; }
         UserId? DeletedByUserForeignKey { get; set; }
-        EUser? LastModifiedByUser { get; set; }
+        User? LastModifiedByUser { get; set; }
         UserId? LastModifiedByUserForeignKey { get; set; }
     }
 }

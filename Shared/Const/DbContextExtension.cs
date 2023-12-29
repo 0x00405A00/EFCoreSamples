@@ -49,6 +49,10 @@ namespace Shared.Const
             public const int EmailSubject = 255;
             public const int EmailAddrLength = 255;
         }
+        public struct Constraint
+        {
+            public const int MaxNameLen = 64;
+        }
 
         public static Func<Type, string> GetTableName = new Func<Type, string>((type) =>
         {
@@ -70,23 +74,36 @@ namespace Shared.Const
         });
 
         public static Func<string, string> GetIndexName = new Func<string, string>((name) =>
-        { 
-            return ($"IDX_{name}").ToUpper(); 
+        {
+            string val = ($"IDX_{name}").ToUpper();
+            return val; 
         });
 
         public static Func<string, string, string, string> GetIndexForFkName = new Func<string, string, string, string>((fromEntity, fromEntityKeyName, foreignEntityName) =>
-        { 
-            return ($"IDX_FK_{fromEntity}_{fromEntityKeyName}_{foreignEntityName}").ToUpper(); 
-        });
-
-        public static Func<string, string, string, string> GetForeignKeyName = new Func<string, string, string, string>((fromEntity,fromEntityKeyName, to) =>
-        { 
-            return ($"FK_{fromEntity}_{fromEntityKeyName}_TO_{to}").ToUpper(); 
-        });
-
-        public static EUser GetRootUser()
         {
-            EUser rootUser = EUser.Create(
+            string val = GenerateName("IDX_FK_", fromEntity, fromEntityKeyName, foreignEntityName).ToUpper();
+            return val; 
+        });
+
+        public static Func<string, string, string, string> GetForeignKeyName = new Func<string, string, string, string>((fromEntity, fromEntityKeyName, to) =>
+        {
+            string val = GenerateName("FK_", fromEntity,fromEntityKeyName,to).ToUpper();
+            return val;
+        });
+        private static Func<string, string, string, string, string> GenerateName = new Func<string, string, string, string, string>((preFix,fromEntity, fromEntityKeyName, to) =>
+        {
+            string shortenerFk = fromEntityKeyName.ToUpper().Replace("FOREIGNKEY", "FK");
+            string val = ($"{preFix}_{fromEntity}_{shortenerFk}_TO_{to}").ToUpper();
+            if(val.Length > Constraint.MaxNameLen)
+            {
+                throw new InvalidOperationException($"Constraint Name: {val} is longer than {Constraint.MaxNameLen} chars");
+            }
+            return val;
+        });
+
+        public static User GetRootUser()
+        {
+            User rootUser = User.Create(
                 new UserId(UserConst.RootUserId),
                 "Root",
                 $"root@localhost",
@@ -100,12 +117,12 @@ namespace Shared.Const
                 null);
             return rootUser;
         }
-        public static List<EUser> GetTestSet()
+        public static List<User> GetTestSet()
         {
-            List<EUser> testSet = new List<EUser>();
+            List<User> testSet = new List<User>();
             for(int i = 0;i<10;i++)
             {
-                var var1 = EUser.Create(
+                var var1 = User.Create(
                     new UserId(Guid.NewGuid()),
                     $"Test{i}",
                     $"test{i}@localhost",

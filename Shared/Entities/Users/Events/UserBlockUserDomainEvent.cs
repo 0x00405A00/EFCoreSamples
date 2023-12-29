@@ -2,7 +2,7 @@
 
 namespace Shared.Entities.Users.Events
 {
-    public record UserBlockUserDomainEvent(EUser e, EUser blockedUser) : DomainEvent(e)
+    public record UserBlockUserDomainEvent(User e, User blockedUser) : DomainEvent(e)
     {
     }
 }

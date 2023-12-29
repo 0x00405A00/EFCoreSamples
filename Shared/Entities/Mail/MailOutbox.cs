@@ -3,7 +3,7 @@ using Shared.ValueObjects.Ids;
 
 namespace Shared.Entities.Mail
 {
-    public sealed class MailOutbox : Entity<MailOutboxId>
+    public sealed partial class MailOutbox : Entity<MailOutboxId>
     {
         public string From { get; private set; }
         public string Subject { get; private set; }
@@ -53,5 +53,10 @@ namespace Shared.Entities.Mail
                 modifiedDateTime,
                 deletedDateTime);
         }
+    }
+    public sealed partial class MailOutbox
+    {
+        public ICollection<MailOutboxAttachment> Attachments { get; }
+        public ICollection<MailOutboxRecipient> Recipients { get; }
     }
 }

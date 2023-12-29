@@ -4,11 +4,9 @@ using Shared.ValueObjects.Ids;
 
 namespace Shared.Entities.Roles
 {
-    public sealed class Role : AuditableEntity<RoleId>
+    public sealed partial class Role : AuditableEntity<RoleId>
     {
         public string Name { get; set; }
-        public ICollection<UserHasRelationToRole> UserHasRelationToRoles { get;}
-        public ICollection<EUser> Users { get; }
         private Role() : base()
         {
             
@@ -52,5 +50,10 @@ namespace Shared.Entities.Roles
                 deletedDateTime,
                 deletedBy);
         }
+    }
+    public sealed partial class Role
+    {
+        public ICollection<UserHasRelationToRole> UserHasRelationToRoles { get; }
+        public ICollection<User> Users { get; }
     }
 }

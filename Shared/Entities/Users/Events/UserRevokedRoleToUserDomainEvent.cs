@@ -3,7 +3,7 @@ using Shared.Primitives;
 
 namespace Shared.Entities.Users.Events
 {
-    public record UserRevokedRoleToUserDomainEvent(EUser revoker, EUser revokeUser, Role revokedRole) : DomainEvent(revokeUser)
+    public record UserRevokedRoleToUserDomainEvent(User revoker, User revokeUser, Role revokedRole) : DomainEvent(revokeUser)
     {
     }
 }

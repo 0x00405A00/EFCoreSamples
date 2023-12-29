@@ -24,7 +24,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .HasMaxLength(DbContextExtension.ColumnLength.Ids)
                 .HasColumnName("message_id");
 
-            string messageOutboxRelationToUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(MessageOutbox), nameof(MessageOutbox.UserForeignKey), nameof(EUser));
+            string messageOutboxRelationToUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(MessageOutbox), nameof(MessageOutbox.UserForeignKey), nameof(User));
             string messageOutboxRelationToChatConstraintName = DbContextExtension.GetForeignKeyName(nameof(MessageOutbox), nameof(MessageOutbox.MessageForeignKey), nameof(Chat));
             builder.HasOne(e => e.User)
                 .WithMany(x => x.MessagesInOutbox)

@@ -32,7 +32,7 @@ namespace Shared.Entities.Chats
     public sealed partial class Message
     {
         public Chat Chat { get; }
-        public EUser User { get; }
+        public User User { get; }
         public ICollection<MessageOutbox>? MessagesInOutbox { get; }
     }
 

@@ -9,8 +9,8 @@ namespace Shared.Primitives
         public UserId? CreatedByUserForeignKey { get; set; }
         public UserId? LastModifiedByUserForeignKey { get; set; }
         public UserId? DeletedByUserForeignKey { get; set; }
-        public EUser? CreatedByUser { get; set; }
-        public EUser? LastModifiedByUser { get; set; }
-        public EUser? DeletedByUser { get; set; }
+        public User? CreatedByUser { get; set; }
+        public User? LastModifiedByUser { get; set; }
+        public User? DeletedByUser { get; set; }
     }
 }

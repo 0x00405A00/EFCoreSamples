@@ -34,7 +34,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 
             builder.HasKey(e => new { e.UserForeignKey, e.ChatForeignKey });
 
-            string chatRelationToUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(ChatRelationToUser), nameof(ChatRelationToUser.UserForeignKey), nameof(EUser));
+            string chatRelationToUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(ChatRelationToUser), nameof(ChatRelationToUser.UserForeignKey), nameof(User));
             string chatRelationToChatConstraintName = DbContextExtension.GetForeignKeyName(nameof(ChatRelationToUser), nameof(ChatRelationToUser.ChatForeignKey), nameof(Chat));
             builder.HasOne(e => e.User)
                 .WithMany(x => x.ChatRelationToUsers)

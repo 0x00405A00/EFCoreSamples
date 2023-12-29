@@ -25,7 +25,7 @@ namespace Shared.Entities.Users
     public sealed partial class ChatInviteRequest
     {
         public Chat Chat { get; set; }
-        public EUser RequesterUser { get; set; }
-        public EUser TargetUser { get; set; }
+        public User RequesterUser { get; set; }
+        public User TargetUser { get; set; }
     }
 }

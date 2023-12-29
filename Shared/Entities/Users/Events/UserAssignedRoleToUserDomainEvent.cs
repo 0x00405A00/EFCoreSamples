@@ -3,7 +3,7 @@ using Shared.Primitives;
 
 namespace Shared.Entities.Users.Events
 {
-    public record UserAssignedRoleToUserDomainEvent(EUser assigner, EUser assignUser, Role assignedRole) : DomainEvent(assignUser)
+    public record UserAssignedRoleToUserDomainEvent(User assigner, User assignUser, Role assignedRole) : DomainEvent(assignUser)
     {
     }
 }

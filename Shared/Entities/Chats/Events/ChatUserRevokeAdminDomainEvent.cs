@@ -3,7 +3,7 @@ using Shared.Primitives;
 
 namespace Shared.Entities.Chats.Events
 {
-    public record ChatUserRevokeAdminDomainEvent(Chat e, EUser revoker, EUser target) : DomainEvent(e)
+    public record ChatUserRevokeAdminDomainEvent(Chat e, User revoker, User target) : DomainEvent(e)
     {
     }
 }

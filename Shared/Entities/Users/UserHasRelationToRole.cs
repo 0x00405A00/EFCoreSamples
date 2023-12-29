@@ -16,7 +16,7 @@ namespace Shared.Entities.Users
     }
     public sealed partial class UserHasRelationToRole
     {
-        public EUser User { get; set; }
+        public User User { get; set; }
         public Role Role { get; set; }
     }
 }

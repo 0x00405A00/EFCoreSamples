@@ -69,7 +69,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
                 .HasColumnType("datetime")
                 .HasColumnName("logout_time");
 
-            string authConstraintName = DbContextExtension.GetForeignKeyName(nameof(Auth), nameof(Auth.UserId), nameof(EUser));
+            string authConstraintName = DbContextExtension.GetForeignKeyName(nameof(Auth), nameof(Auth.UserId), nameof(User));
             builder.HasOne(u => u.User)
                 .WithMany(x => x.Auths)
                 .IsRequired(false)

@@ -13,10 +13,10 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
         {
             builder.AddDefaultProperties<FriendshipRequest, FriendshipRequestId>();
 
-            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(FriendshipRequest), nameof(FriendshipRequest.RequesterUser), nameof(EUser));
+            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(FriendshipRequest), nameof(FriendshipRequest.RequesterUser), nameof(User));
             builder.HasIndex(e => e.RequestUserForeignKey, fk1Index);
 
-            var fk2Index = DbContextExtension.GetIndexForFkName(nameof(FriendshipRequest), nameof(FriendshipRequest.TargetUser), nameof(EUser));
+            var fk2Index = DbContextExtension.GetIndexForFkName(nameof(FriendshipRequest), nameof(FriendshipRequest.TargetUser), nameof(User));
             builder.HasIndex(e => e.TargetUserForeignKey, fk2Index);
 
             builder.Property(ut => ut.RequestUserForeignKey)
@@ -36,8 +36,8 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 
             builder.HasKey(e => new { e.RequestUserForeignKey, e.TargetUserForeignKey });
 
-            string constraintLeftName = DbContextExtension.GetForeignKeyName(nameof(FriendshipRequest), nameof(FriendshipRequest.RequestUserForeignKey), nameof(EUser));
-            string constraintRightName = DbContextExtension.GetForeignKeyName(nameof(FriendshipRequest), nameof(FriendshipRequest.TargetUserForeignKey), nameof(EUser));
+            string constraintLeftName = DbContextExtension.GetForeignKeyName(nameof(FriendshipRequest), nameof(FriendshipRequest.RequestUserForeignKey), nameof(User));
+            string constraintRightName = DbContextExtension.GetForeignKeyName(nameof(FriendshipRequest), nameof(FriendshipRequest.TargetUserForeignKey), nameof(User));
             builder.HasOne(e => e.RequesterUser).WithMany(x => x.FriendshipRequestsWhereIamRequester).HasForeignKey(x => x.RequestUserForeignKey).HasConstraintName(constraintLeftName).OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(t => t.TargetUser).WithMany(e => e.FriendshipRequestsWhereIamTarget).HasForeignKey(e => e.TargetUserForeignKey).HasConstraintName(constraintRightName).OnDelete(DeleteBehavior.Cascade);
         }

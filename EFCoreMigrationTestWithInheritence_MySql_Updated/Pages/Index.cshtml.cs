@@ -30,7 +30,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Pages
         {
 
 
-            var DbSet = dbContext.Set<EUser>();
+            var DbSet = dbContext.Set<User>();
             //Synchron Tests
             var rootUserSelect = DbSet
                 .Include(x => x.UserHasRelationToRoles)
@@ -69,7 +69,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Pages
 
             //Asynchron Tests
             const string newName = "Root_xyz";
-            EUser testUserSelectAsync = await dbContext.Users.Where(x => x.Name == "Test")
+            User testUserSelectAsync = await dbContext.Users.Where(x => x.Name == "Test")
                                                  .FirstOrDefaultAsync();
 
             testUserSelectAsync.SetName(newName);
@@ -92,7 +92,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Pages
             //DML Tests->Insert new Entity
             var randNumber = Random.Shared.Next(testUsersSelectAsync.Count, testUsersSelectAsync.Count * 2);
             var name = $"{testUserSelectAsync.Name}_{randNumber}";
-            EUser newUser = EUser.Create(
+            User newUser = global::Shared.Entities.Users.User.Create(
                 new UserId(UserConst.RootUserId),
                 name,
                  $"{name}@test.com",
@@ -104,7 +104,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Pages
                 null,
                 null,
                 null); 
-            await dbContext.Set<EUser>().AddAsync(newUser);
+            await dbContext.Set<User>().AddAsync(newUser);
             await dbContext.SaveChangesAsync();
             return new OkResult();
         }

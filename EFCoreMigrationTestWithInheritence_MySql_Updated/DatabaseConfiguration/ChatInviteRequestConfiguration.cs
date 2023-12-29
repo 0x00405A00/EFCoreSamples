@@ -14,10 +14,10 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
         {
             builder.AddDefaultProperties<ChatInviteRequest, ChatInviteRequestId>();
 
-            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(ChatInviteRequest), nameof(ChatInviteRequest.RequesterUser), nameof(EUser));
+            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(ChatInviteRequest), nameof(ChatInviteRequest.RequesterUser), nameof(User));
             builder.HasIndex(e => e.RequesterUserForeignKey, fk1Index);
 
-            var fk2Index = DbContextExtension.GetIndexForFkName(nameof(ChatInviteRequest), nameof(ChatInviteRequest.TargetUser), nameof(EUser));
+            var fk2Index = DbContextExtension.GetIndexForFkName(nameof(ChatInviteRequest), nameof(ChatInviteRequest.TargetUser), nameof(User));
             builder.HasIndex(e => e.TargetUserForeignKey, fk2Index);
 
             var fk3Index = DbContextExtension.GetIndexForFkName(nameof(ChatInviteRequest), nameof(ChatInviteRequest.Chat), nameof(Chat));
@@ -45,8 +45,8 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 
             builder.HasKey(e => new { e.ChatForeignKey, e.TargetUserForeignKey });
 
-            string constraintLeftName = DbContextExtension.GetForeignKeyName(nameof(ChatInviteRequest), nameof(ChatInviteRequest.RequesterUserForeignKey), nameof(EUser));
-            string constraintRightName = DbContextExtension.GetForeignKeyName(nameof(ChatInviteRequest), nameof(ChatInviteRequest.TargetUserForeignKey), nameof(EUser));
+            string constraintLeftName = DbContextExtension.GetForeignKeyName(nameof(ChatInviteRequest), nameof(ChatInviteRequest.RequesterUserForeignKey), nameof(User));
+            string constraintRightName = DbContextExtension.GetForeignKeyName(nameof(ChatInviteRequest), nameof(ChatInviteRequest.TargetUserForeignKey), nameof(User));
             string constraintToChatName = DbContextExtension.GetForeignKeyName(nameof(ChatInviteRequest), nameof(ChatInviteRequest.ChatForeignKey), nameof(Chat));
             builder.HasOne(e => e.RequesterUser).WithMany(x => x.ChatInvitesWhereIamRequester).HasForeignKey(x => x.RequesterUserForeignKey).HasConstraintName(constraintLeftName).OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(t => t.TargetUser).WithMany(e => e.ChatInvitesWhereIamTarget).HasForeignKey(e => e.TargetUserForeignKey).HasConstraintName(constraintRightName).OnDelete(DeleteBehavior.Cascade);

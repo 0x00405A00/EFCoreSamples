@@ -7,7 +7,7 @@ namespace Shared.Entities.Auths
     public sealed class Auth : Entity<AuthId>
     {
         public UserId UserId { get; private set; }
-        public EUser User { get; set; }
+        public User User { get; set; }
 
         public string RemoteIp { get; private set; }
         public uint RemoteIpPort { get; private set; }

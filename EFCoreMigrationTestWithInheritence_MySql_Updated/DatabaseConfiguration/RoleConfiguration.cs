@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shared.Const;
 using Shared.Entities.Roles;
-using Shared.Entities.Users;
 using Shared.Primitives;
 using Shared.ValueObjects.Ids;
 

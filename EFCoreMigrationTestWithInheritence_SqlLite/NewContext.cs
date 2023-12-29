@@ -16,7 +16,7 @@ namespace EFCoreMigrationTestWithInheritence_SqlLite
         #endregion
         #region DbSets
         public DbSet<UserType> UserTypes { get; set; }
-        public DbSet<EUser> Users { get; set; }
+        public DbSet<User> Users { get; set; }
         #endregion
         #region Ctor
         public NewContext():base()

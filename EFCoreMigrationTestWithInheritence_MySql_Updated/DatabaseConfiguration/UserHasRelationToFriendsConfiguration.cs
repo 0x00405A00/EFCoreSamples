@@ -13,10 +13,10 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
         {
             builder.AddDefaultProperties<UserHasRelationToFriend, UserHasRelationToFriendId>();
 
-            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToFriend), nameof(UserHasRelationToFriend.UserForeignKey), nameof(EUser));
+            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToFriend), nameof(UserHasRelationToFriend.UserForeignKey), nameof(User));
             builder.HasIndex(e => e.UserForeignKey, fk1Index);
 
-            var fk2Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToFriend), nameof(UserHasRelationToFriend.UserFriendForeignKey), nameof(EUser));
+            var fk2Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToFriend), nameof(UserHasRelationToFriend.UserFriendForeignKey), nameof(User));
             builder.HasIndex(e => e.UserFriendForeignKey, fk2Index);
 
             builder.Property(ut => ut.UserFriendForeignKey)
@@ -31,8 +31,8 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
 
             builder.HasKey(e => new { e.UserForeignKey, e.UserFriendForeignKey });
 
-            string userFriendsUserToUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToFriend), nameof(UserHasRelationToFriend.UserForeignKey), nameof(EUser));
-            string userFriendsFriendToUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToFriend), nameof(UserHasRelationToFriend.UserFriendForeignKey), nameof(EUser));
+            string userFriendsUserToUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToFriend), nameof(UserHasRelationToFriend.UserForeignKey), nameof(User));
+            string userFriendsFriendToUserConstraintName = DbContextExtension.GetForeignKeyName(nameof(UserHasRelationToFriend), nameof(UserHasRelationToFriend.UserFriendForeignKey), nameof(User));
             builder.HasOne(e => e.User)
                 .WithMany(x => x.UserHasRelationToFriendsLeft)
                 .HasForeignKey(x => x.UserForeignKey)

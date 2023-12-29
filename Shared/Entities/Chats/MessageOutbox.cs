@@ -26,6 +26,6 @@ namespace Shared.Entities.Chats
     public sealed partial class MessageOutbox
     {
         public Message Message { get; }
-        public EUser User { get; }
+        public User User { get; }
     }
 }

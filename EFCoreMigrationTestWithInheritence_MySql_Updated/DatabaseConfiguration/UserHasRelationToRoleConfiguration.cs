@@ -15,7 +15,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.DatabaseConfiguration
             builder.AddDefaultProperties<UserHasRelationToRole, UserHasRelationToRoleId>();
             builder.AddAuditableProperties<UserHasRelationToRole, UserHasRelationToRoleId>();
 
-            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.UserForeignKey), nameof(EUser));
+            var fk1Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.UserForeignKey), nameof(User));
             builder.HasIndex(e => e.UserForeignKey, fk1Index);
 
             var fk2Index = DbContextExtension.GetIndexForFkName(nameof(UserHasRelationToRole), nameof(UserHasRelationToRole.RoleForeignKey), nameof(Role));

@@ -17,7 +17,7 @@ namespace Shared.Entities.Chats
     }
     public sealed partial class ChatRelationToUser
     {
-        public EUser User { get; }
+        public User User { get; }
         public Chat Chat { get; }
     }
 }
