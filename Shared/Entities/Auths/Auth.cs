@@ -4,10 +4,9 @@ using Shared.ValueObjects.Ids;
 
 namespace Shared.Entities.Auths
 {
-    public sealed class Auth : Entity<AuthId>
+    public sealed partial class Auth : Entity<AuthId>
     {
         public UserId UserId { get; private set; }
-        public User User { get; set; }
 
         public string RemoteIp { get; private set; }
         public uint RemoteIpPort { get; private set; }
@@ -25,7 +24,7 @@ namespace Shared.Entities.Auths
 
         }
         private Auth(
-            AuthId authId,
+            AuthId id,
             UserId userId,
             string remoteIp,
             uint remoteIpPort,
@@ -38,7 +37,7 @@ namespace Shared.Entities.Auths
             string refreshToken,
             CustomDateTime? logoutTime) : base()
         {
-            Id = authId;
+            Id = id;
             UserId = userId;
             RemoteIp = remoteIp;
             RemoteIpPort = remoteIpPort;
@@ -66,18 +65,22 @@ namespace Shared.Entities.Auths
             CustomDateTime? logoutTime)
         {
             return new Auth(
-            authId,
-            userId,
-            remoteIp,
-            remoteIpPort,
-            localIp,
-            localIpPort,
-            token,
-            tokenExpiresIn,
-            userAgent,
-            refreshTokenExpiresIn,
-            refreshToken,
-            logoutTime);
+                authId,
+                userId,
+                remoteIp,
+                remoteIpPort,
+                localIp,
+                localIpPort,
+                token,
+                tokenExpiresIn,
+                userAgent,
+                refreshTokenExpiresIn,
+                refreshToken,
+                logoutTime);
         }
+    }
+    public sealed partial class Auth
+    {
+        public User User { get; set; }
     }
 }

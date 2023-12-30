@@ -3,10 +3,9 @@ using Shared.ValueObjects.Ids;
 
 namespace Shared.Entities.Users
 {
-    public sealed class UserType : AuditableEntity<UserTypeId>
+    public sealed partial class UserType : AuditableEntity<UserTypeId>
     {
         public string Name { get; private set; }
-        public ICollection<User>? Users { get; }
         private UserType() : base()
         { 
         
@@ -50,5 +49,9 @@ namespace Shared.Entities.Users
                 deletedDateTime,
                 deletedBy);
         }
+    }
+    public sealed partial class UserType
+    {
+        public ICollection<User>? Users { get; }
     }
 }

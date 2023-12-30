@@ -11,12 +11,14 @@ namespace Shared.Entities.Mail
         {
 
         }
-        private EmailSendingType(EmailTypeId emailTypeId, string name,
+        private EmailSendingType(
+            EmailTypeId id,
+            string name,
             CustomDateTime createdDateTime,
             CustomDateTime? modifiedDateTime,
             CustomDateTime? deletedDateTime)
         {
-            Id= emailTypeId;    
+            Id= id;    
             Name = name;
             CreatedTime = createdDateTime;
             LastModifiedTime = modifiedDateTime;

@@ -14,7 +14,7 @@ namespace Shared.Entities.Mail
 
         }
         private MailOutboxRecipient(
-            MailOutboxRecipientId mailOutboxRecipientId,
+            MailOutboxRecipientId id,
             MailOutboxId mailOutboxId,
             EmailTypeId emailTypeId,
             string email,
@@ -22,7 +22,7 @@ namespace Shared.Entities.Mail
             CustomDateTime? modifiedDateTime,
             CustomDateTime? deletedDateTime)
         {
-            Id = mailOutboxRecipientId;
+            Id = id;
             MailOutboxForeignKey = mailOutboxId;
             EmailSendingTypeForeignKey = emailTypeId;
             Email = email;
@@ -31,7 +31,7 @@ namespace Shared.Entities.Mail
             DeletedTime = deletedDateTime;
         }
         public static MailOutboxRecipient Create(
-            MailOutboxRecipientId mailOutboxRecipientId,
+            MailOutboxRecipientId id,
             MailOutboxId mailOutboxId,
             EmailTypeId emailTypeId,
             string email,
@@ -40,7 +40,7 @@ namespace Shared.Entities.Mail
             CustomDateTime? deletedDateTime)
         {
             return new MailOutboxRecipient(
-                mailOutboxRecipientId,
+                id,
                 mailOutboxId,
                 emailTypeId,
                 email,

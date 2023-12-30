@@ -28,5 +28,9 @@ namespace Shared.Primitives
             DeletedTime = new CustomDateTime(DateTime.Now);
             DeletedByUser = deletedBy;
         }
+        protected AuditableEntity():base()
+        {
+
+        }
     }
 }

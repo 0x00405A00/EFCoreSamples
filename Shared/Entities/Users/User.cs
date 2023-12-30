@@ -11,10 +11,6 @@ namespace Shared.Entities.Users
     /// </summary>
     public sealed partial class User : AuditableEntity<UserId>
     {
-        public UserId? CreatedByUserForeignKey { get; private set; }
-        public UserId? LastModifiedByUserForeignKey { get; private set; }
-        public UserId? DeletedByUserForeignKey { get; private set; }
-
         public string Name { get; private set; }
         public string Email { get; private set; }
         public string Password { get; private set; }

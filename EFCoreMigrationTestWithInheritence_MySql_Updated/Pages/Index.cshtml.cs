@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Shared.Const;
 using Shared.Entities.Users;
+using Shared.Extension;
 using Shared.Primitives;
 using Shared.ValueObjects.Ids;
 
@@ -46,7 +47,7 @@ namespace EFCoreMigrationTestWithInheritence_MySql_Updated.Pages
                 .Include(x => x.FriendshipRequestsWhereIamTarget)
                 .ThenInclude(x => x.RequesterUser)
                 .AsNoTracking()
-                .Where(x => x.Name == "Root")
+                .Where(x => x.Id == UserConst.RootUserId.ToIdentification<UserId>())
                 .AsSingleQuery()
                 .ToList();
             var testUserSelect = DbSet

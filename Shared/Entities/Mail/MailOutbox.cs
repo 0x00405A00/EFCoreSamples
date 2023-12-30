@@ -15,7 +15,7 @@ namespace Shared.Entities.Mail
 
         }
         private MailOutbox(
-            MailOutboxId mailOutboxId,
+            MailOutboxId id,
             string from,
             string subject,
             string body,
@@ -24,7 +24,7 @@ namespace Shared.Entities.Mail
             CustomDateTime? modifiedDateTime,
             CustomDateTime? deletedDateTime)
         {
-            Id = mailOutboxId;
+            Id = id;
             From = from;
             Subject = subject;
             Body = body;
@@ -34,7 +34,7 @@ namespace Shared.Entities.Mail
             DeletedTime = deletedDateTime;
         }
         public static MailOutbox Create(
-            MailOutboxId mailOutboxId,
+            MailOutboxId id,
             string from,
             string subject,
             string body,
@@ -44,7 +44,7 @@ namespace Shared.Entities.Mail
             CustomDateTime? deletedDateTime)
         {
             return new MailOutbox(
-                mailOutboxId,
+                id,
                 from,
                 subject,
                 body,
